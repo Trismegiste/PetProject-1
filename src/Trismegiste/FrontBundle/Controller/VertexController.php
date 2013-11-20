@@ -22,7 +22,7 @@ class VertexController extends Template
 
     public function createAction()
     {
-        $form = $this->createForm(new VertexForm(['lieu', 'pnj', 'item']));
+        $form = $this->createForm(new VertexForm());
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $form->bind($this->getRequest());
@@ -41,7 +41,7 @@ class VertexController extends Template
     public function editAction($id)
     {
         $vertex = $this->get('dokudoki.repository')->findByPk($id);
-        $form = $this->createForm(new VertexForm(['lieu', 'pnj', 'item']), $vertex);
+        $form = $this->createForm(new VertexForm(), $vertex);
 
         if ($this->getRequest()->getMethod() == 'POST') {
             $form->bind($this->getRequest());

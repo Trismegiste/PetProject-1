@@ -26,9 +26,10 @@ class Vertex extends AbstractType
 
     protected $choiceType;
 
-    public function __construct(array $typeList)
+    public function __construct()
     {
-        $this->choiceType = $typeList;
+        $typeList = ['lieu', 'pnj', 'item'];
+        $this->choiceType = array_combine($typeList, $typeList);
     }
 
     public function getName()
