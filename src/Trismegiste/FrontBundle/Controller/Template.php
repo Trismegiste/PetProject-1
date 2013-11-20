@@ -14,6 +14,16 @@ use Symfony\Component\HttpFoundation\Response;
 abstract class Template extends Controller
 {
 
+    protected function getRepo()
+    {
+        return $this->get('dokudoki.repository');
+    }
+
+    protected function getCollection()
+    {
+        return $this->get('dokudoki.collection');
+    }
+
     public function aboutAction()
     {
         return $this->render('TrismegisteFrontBundle:Default:about.html.twig');

@@ -54,8 +54,9 @@ class Vertex extends AbstractType
                 ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
                             $data = $event->getData();
                             $form = $event->getForm();
-                            //       if (!is_null($data) && !is_null())
-                            //      var_dump($form['infoType']->getConfig());
+                            if (!is_null($data) && !is_null($data->getId())) {
+                                unset($form['infoType']);
+                            }
                         });
     }
 

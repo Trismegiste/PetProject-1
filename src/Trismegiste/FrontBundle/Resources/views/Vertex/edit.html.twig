@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
+<h2>Editer un {{ vertex.getInfoType() }}</h2>
 <div>
     {{ form(form, {action: path('vertex_edit', {id: vertex.id})}) }}
 </div>

@@ -14,9 +14,9 @@ use Trismegiste\DokudokiBundle\Persistence\Persistable;
 class Vertex implements Persistable
 {
 
-    use \Trismegiste\Magic\Proto\AnemicModel\GetterSetter;
+    use \Trismegiste\Magic\Proto\AnemicModel\GetterSetter,
+        \Trismegiste\DokudokiBundle\Persistence\PersistableImpl;
 
-    protected $id;
     protected $infoType;
     protected $title;
     protected $headline;
@@ -26,16 +26,6 @@ class Vertex implements Persistable
     public function __construct($str)
     {
         $this->title = $str;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId(\MongoId $pk)
-    {
-        $this->id = $pk;
     }
 
 }

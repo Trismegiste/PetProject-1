@@ -20,4 +20,7 @@
         <default key="_controller">TrismegisteFrontBundle:Vertex:edit</default>
     </route>
 
+    <route id="vertex_show" pattern="/vertex/show/{id}">
+        <default key="_controller">TrismegisteFrontBundle:Vertex:show</default>
+    </route>
 </routes>

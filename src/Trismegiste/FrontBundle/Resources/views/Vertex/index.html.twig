@@ -1,7 +1,18 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-<div class="hero-unit">
-    <h1>Hello World</h1>
+<div class="row-fluid">
+    <div class="span4">
+        <h3>PNJ</h3>
+        {% include 'TrismegisteFrontBundle:Vertex:list.html.twig' with {'vertices': vertex.pnj} only %}
+    </div>
+    <div class="span4">
+        <h3>Lieu</h3>
+        {% include 'TrismegisteFrontBundle:Vertex:list.html.twig' with {'vertices': vertex.lieu} only %}
+    </div>
+    <div class="span4">
+        <h3>Item</h3>
+        {% include 'TrismegisteFrontBundle:Vertex:list.html.twig' with {'vertices': vertex.item} only %}
+    </div>
 </div>
 {% endblock %}

@@ -15,9 +15,29 @@ use Trismegiste\FrontBundle\Form\Vertex as VertexForm;
 class VertexController extends Template
 {
 
+    protected function getVertex($id)
+    {
+        return $this->getRepo()->findByPk($id);
+    }
+
     public function indexAction()
     {
-        return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig');
+        $cursor = $this->getCollection()->find();
+
+        $vertex = [];
+        foreach ($cursor as $doc) {
+            $obj = $this->getRepo()->createFromDb($doc);
+            $vertex[$obj->getInfoType()][] = $obj;
+        }
+
+        return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);
+    }
+
+    public function showAction($id)
+    {
+        $vertex = $this->getVertex($id);
+
+        return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
     }
 
     public function createAction()
@@ -40,7 +60,7 @@ class VertexController extends Template
 
     public function editAction($id)
     {
-        $vertex = $this->get('dokudoki.repository')->findByPk($id);
+        $vertex = $this->getVertex($id);
         $form = $this->createForm(new VertexForm(), $vertex);
 
         if ($this->getRequest()->getMethod() == 'POST') {

@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span6">
+        <h2>{{ vertex.getInfoType() }} {{ vertex.getTitle() }}</h2>
+        <h3>{{ vertex.getHeadline() }}</h3>
+        {{ vertex.getDescription() }}
+    </div>
+    <div class="span6">
+        <h2>MJ only</h2>
+        {{ vertex.getGmOnly() }}
+    </div>
+    </div>
+<hr/>
+    <a href="{{ path('vertex_edit', {id: vertex.id} ) }}">Editer</a>
+{% endblock %}
