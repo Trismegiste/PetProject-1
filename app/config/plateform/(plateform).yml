@@ -1,0 +1,3 @@
+parameters:
+
+    mongodb_server:    localhost:27017

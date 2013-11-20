@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div>
+    {{ form(form, {action: path('vertex_edit', {id: vertex.id})}) }}
+</div>
+{% endblock %}
