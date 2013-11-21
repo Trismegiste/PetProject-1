@@ -36,6 +36,7 @@ class VertexController extends Template
     public function showAction($id)
     {
         $vertex = $this->getVertex($id);
+        $this->get('session')->set('most_recent', $id);
 
         return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
     }
