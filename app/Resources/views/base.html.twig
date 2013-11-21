@@ -23,9 +23,9 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-        {% block navbar %}
-        {% include '::navbar.html.twig' %}
-        {% endblock %}
+        {% embed '::navbar.html.twig' %}
+        {% block most_recent %}<li class="active"><a href="/aaa">aaaa</a></li>{% endblock %}
+        {% endembed %}
 
         <div class="container">
             {% for flashMessage in app.session.flashbag.get('notice') %}
