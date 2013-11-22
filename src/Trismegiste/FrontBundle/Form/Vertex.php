@@ -46,9 +46,9 @@ class Vertex extends AbstractType
                     'disabled' => false
                 ])
                 ->add('title', 'text', ['constraints' => new Assert\NotBlank(), 'required' => true])
-                ->add('headline', 'text', ['required' => false])
-                ->add('description', 'textarea')
-                ->add('gmOnly', 'textarea', ['required' => false])
+                ->add('headline', 'text', ['required' => false, 'attr' => ['class' => 'span6']])
+                ->add('description', 'textarea', ['attr' => ['class' => 'span6', 'rows' => 6]])
+                ->add('gmOnly', 'textarea', ['required' => false, 'attr' => ['class' => 'span6', 'rows' => 6]])
                 ->add('submit', 'submit')
                 ->setDataMapper(new PropertyPathMapper(new PropertyAccessor(true)))
                 ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
