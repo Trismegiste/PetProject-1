@@ -18,11 +18,8 @@
     </services>
     -->
     <services>
-        <service id="front.history" class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false">
-            <argument>history</argument>
-            <call method="setName">
-                <argument>history</argument>
-            </call>
+        <service id="front.history" class="Trismegiste\FrontBundle\DependencyInjection\HistoryStack" public="false">
+            <argument>8</argument>
         </service>
     </services>
 </container>

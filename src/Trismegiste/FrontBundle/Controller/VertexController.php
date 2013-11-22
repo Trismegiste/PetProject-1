@@ -33,15 +33,17 @@ class VertexController extends Template
         return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);
     }
 
-    protected function getHistoryStack()
+    protected function pushHistoryStack(Vertex $v)
     {
-        return $this->get('session')->getBag('history');
+        return $this->get('session')
+                        ->getBag('history')
+                        ->push($this->generateUrl('vertex_show', ['id' => $v->getId()]), $v->getTitle());
     }
 
     public function showAction($id)
     {
         $vertex = $this->getVertex($id);
-        $this->getHistoryStack()->add('vertex', [$id, $vertex->getTitle()]);
+        $this->pushHistoryStack($vertex);
 
         return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
     }

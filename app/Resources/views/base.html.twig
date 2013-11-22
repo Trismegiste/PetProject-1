@@ -28,8 +28,8 @@
                    History <b class="caret"></b>
                </a>
                 <ul class="dropdown-menu">
-                    {% for link in app.session.getBag('history').peek('vertex') %}
-                        <li><a href="{{ path('vertex_show', {id: link[0]}) }}">{{ link[1] }}</a></li>
+                    {% for url, title in app.session.getBag('history') %}
+                        <li><a href="{{ url }}">{{ title }}</a></li>
                     {% endfor %}
                </ul>
            </li>
