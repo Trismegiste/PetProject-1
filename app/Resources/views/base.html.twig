@@ -28,11 +28,9 @@
                    History <b class="caret"></b>
                </a>
                 <ul class="dropdown-menu">
-                {% if app.session.has('most_recent') %}
-                    {% for pk, link in app.session.get('most_recent') %}
-                        <li><a href="{{ path('vertex_show', {id: pk}) }}">{{ link }}</a></li>
+                    {% for link in app.session.getBag('history').peek('vertex') %}
+                        <li><a href="{{ path('vertex_show', {id: link[0]}) }}">{{ link[1] }}</a></li>
                     {% endfor %}
-                {% endif %}
                </ul>
            </li>
         {% endblock %}

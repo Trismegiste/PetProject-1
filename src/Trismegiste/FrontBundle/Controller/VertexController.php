@@ -35,17 +35,13 @@ class VertexController extends Template
 
     protected function getHistoryStack()
     {
-        if (!$this->get('session')->has('most_recent')) {
-            $this->get('session')->set('most_recent', new \ArrayObject());
-        }
-
-        return $this->get('session')->get('most_recent');
+        return $this->get('session')->getBag('history');
     }
 
     public function showAction($id)
     {
         $vertex = $this->getVertex($id);
-        $this->getHistoryStack()[$id] = $vertex->getTitle();
+        $this->getHistoryStack()->add('vertex', [$id, $vertex->getTitle()]);
 
         return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
     }

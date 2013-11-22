@@ -17,4 +17,12 @@
         </service>
     </services>
     -->
+    <services>
+        <service id="front.history" class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false">
+            <argument>history</argument>
+            <call method="setName">
+                <argument>history</argument>
+            </call>
+        </service>
+    </services>
 </container>
