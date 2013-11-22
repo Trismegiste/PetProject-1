@@ -21,16 +21,18 @@
     </head>
     <body>
 
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
         {% embed '::navbar.html.twig' %}
         {% block additional %}
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    History <b class="caret"></b>
                </a>
-               <ul class="dropdown-menu">
-                <li><a href="#">aaaa</a></li>
+                <ul class="dropdown-menu">
+                {% if app.session.has('most_recent') %}
+                    {% for pk, link in app.session.get('most_recent') %}
+                        <li><a href="{{ path('vertex_show', {id: pk}) }}">{{ link }}</a></li>
+                    {% endfor %}
+                {% endif %}
                </ul>
            </li>
         {% endblock %}
