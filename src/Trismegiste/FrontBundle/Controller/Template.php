@@ -54,4 +54,14 @@ abstract class Template extends Controller
         return parent::render($view, $parameters, $response);
     }
 
+    protected function pushFlash($type, $msg)
+    {
+        $this->get('session')->getFlashBag()->add($type, $msg);
+    }
+
+    protected function redirectRouteOk($name, $param = [])
+    {
+        return $this->redirect($this->generateUrl($name, $param));
+    }
+
 }

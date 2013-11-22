@@ -56,14 +56,16 @@ class VertexController extends Template
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $vertex = $form->getData();
-                $this->get('dokudoki.repository')->persist($vertex);
-                $this->get('session')->getFlashBag()->add('notice', 'Created');
+                $this->getRepo()->persist($vertex);
+                $this->pushFlash('notice', 'Created');
 
-                return $this->redirect($this->generateUrl('vertex_edit', ['id' => $vertex->getId()]));
+                return $this->redirectRouteOk('vertex_edit', ['id' => $vertex->getId()]);
             }
         }
 
-        return $this->render('TrismegisteFrontBundle:Vertex:create.html.twig', array('form' => $form->createView()));
+        return $this->render('TrismegisteFrontBundle:Vertex:create.html.twig', [
+                    'form' => $form->createView()
+        ]);
     }
 
     public function editAction($id)
@@ -74,10 +76,10 @@ class VertexController extends Template
         if ($this->getRequest()->getMethod() == 'POST') {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
-                $this->get('dokudoki.repository')->persist($vertex);
-                $this->get('session')->getFlashBag()->add('notice', 'Updated');
+                $this->getRepo()->persist($vertex);
+                $this->pushFlash('notice', 'Updated');
 
-                return $this->redirect($this->generateUrl('vertex_edit', ['id' => $vertex->getId()]));
+                return $this->redirectRouteOk('vertex_edit', ['id' => $vertex->getId()]);
             }
         }
 
