@@ -23,4 +23,8 @@
     <route id="vertex_show" pattern="/vertex/show/{id}">
         <default key="_controller">TrismegisteFrontBundle:Vertex:show</default>
     </route>
+    
+    <route id="vertex_findbytitle" pattern="/vertex/search/{query}">
+        <default key="_controller">TrismegisteFrontBundle:Vertex:ajaxFindByTitle</default>
+    </route>
 </routes>

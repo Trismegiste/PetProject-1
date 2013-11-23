@@ -6,7 +6,7 @@
 
 namespace Trismegiste\FrontBundle\Model;
 
-use Trismegiste\DokudokiBundle\Persistence\Persistable;
+use Trismegiste\Yuurei\Persistence\Persistable;
 
 /**
  * Vertex is a node of rpg
@@ -15,7 +15,7 @@ class Vertex implements Persistable
 {
 
     use \Trismegiste\Magic\Proto\AnemicModel\GetterSetter,
-        \Trismegiste\DokudokiBundle\Persistence\PersistableImpl;
+        \Trismegiste\Yuurei\Persistence\PersistableImpl;
 
     protected $infoType;
     protected $title;

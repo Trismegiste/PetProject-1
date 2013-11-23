@@ -1,6 +1,6 @@
 {
-    "name": "trismegiste/sympony",
-    "description": "My fat-free \"Symfony Non-Standard Edition\" distribution",
+    "name": "trismegiste/rpgraph",
+    "description": "Rpgraph",
     "autoload": {
         "psr-0": {"": "src/"}
     },
@@ -13,7 +13,8 @@
         "sensio/distribution-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "trismegiste/dokudoki": "dev-master",
-        "trismegiste/php-is-magic": "dev-master"
+        "trismegiste/php-is-magic": "dev-master",
+        "michelf/php-markdown": "~1.3"
     },
     "scripts": {
         "post-install-cmd": [
@@ -35,15 +36,12 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.3-dev"
         }
     }
 }

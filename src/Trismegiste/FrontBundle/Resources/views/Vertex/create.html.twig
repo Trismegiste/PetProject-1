@@ -6,3 +6,33 @@
     {{ form(form, {action: path('vertex_create')}) }}
 </div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('#vertex_description').mention({
+				users: [{
+					username: 'LindsayM'
+				}, {
+					username: 'robdyrdek'
+				}, {
+					username: 'RickyBahner'
+				}, {
+					username: 'jakiestfu'
+				}, {
+					username: 'HackMurphy'
+				}, {
+					username: 'charlie'
+				}, {
+					username: 'andream'
+				}, {
+					username: 'calisunshine'
+				}, {
+					username: 'streetleague'
+				}, {
+					username: 'Loudmouthfoods'
+				}]
+			});
+    })
+</script>
+{% endblock %}

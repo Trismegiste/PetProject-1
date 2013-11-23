@@ -89,4 +89,16 @@ class VertexController extends Template
         ]);
     }
 
+    public function ajaxFindByTitleAction($query)
+    {
+        $cursor = $this->getCollection()->find(['title' => $query]);
+
+        $found = [];
+        foreach ($cursor as $item) {
+            $found[(string) $item['_id']] = $item['title'];
+        }
+
+        return new \Symfony\Component\HttpFoundation\JsonResponse($found);
+    }
+
 }
