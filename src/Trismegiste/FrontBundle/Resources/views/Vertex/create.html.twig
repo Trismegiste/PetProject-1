@@ -10,29 +10,9 @@
 {% block javascripts %}
 <script>
     $(document).ready(function() {
-        $('#vertex_description').mention({
-				users: [{
-					username: 'LindsayM'
-				}, {
-					username: 'robdyrdek'
-				}, {
-					username: 'RickyBahner'
-				}, {
-					username: 'jakiestfu'
-				}, {
-					username: 'HackMurphy'
-				}, {
-					username: 'charlie'
-				}, {
-					username: 'andream'
-				}, {
-					username: 'calisunshine'
-				}, {
-					username: 'streetleague'
-				}, {
-					username: 'Loudmouthfoods'
-				}]
-			});
+        $('textarea.mentionable').mention(
+            {% render(controller('TrismegisteFrontBundle:Vertex:getAllMention')) %}
+        );
     })
 </script>
 {% endblock %}

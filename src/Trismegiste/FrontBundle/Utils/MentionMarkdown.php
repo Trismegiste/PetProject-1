@@ -6,27 +6,33 @@
 
 namespace Trismegiste\FrontBundle\Utils;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 /**
- * MentionMarkdown is a markdown with mention '@xxxx'
+ * MentionMarkdown is a markdown with mention '@slug' for vertex
  */
 class MentionMarkdown extends \Michelf\Markdown
 {
 
-    protected $mention;
+    protected $urlGenerator;
+    protected $baseRoute;
 
-    public function __construct()
+    public function __construct(UrlGeneratorInterface $gene, $baseroute)
     {
-        $this->mention = [];
+        $this->urlGenerator = $gene;
+        $this->baseRoute = $baseroute;
         $this->span_gamut['doAnchorMention'] = 19;
         parent::__construct();
     }
 
     protected function doAnchorMention($text)
     {
-        return preg_replace_callback('#(^|\s)@([^\s]+)#', function($matches) {
-            print_r($matches);
+        $generator = $this->urlGenerator;
+        $route = $this->baseRoute;
+        return preg_replace_callback('#(^|\s)@([^\s]+)#', function($matches) use ($generator, $route) {
                     $slug = $matches[2];
-                    return " [$slug](/app_dev.php/vertex/show/$slug)";
+                    $url = $generator->generate($route, ['slug' => $slug]);
+                    return " [$slug]($url)";
                 }, $text);
     }
 

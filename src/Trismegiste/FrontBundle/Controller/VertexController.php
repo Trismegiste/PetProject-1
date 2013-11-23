@@ -8,7 +8,7 @@ namespace Trismegiste\FrontBundle\Controller;
 
 use Trismegiste\FrontBundle\Model\Vertex;
 use Trismegiste\FrontBundle\Form\Vertex as VertexForm;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * VertexController manages CRUD for Vertex
  */
@@ -89,16 +89,27 @@ class VertexController extends Template
         ]);
     }
 
-    public function ajaxFindByTitleAction($query)
+    public function findSlugAction($slug)
     {
-        $cursor = $this->getCollection()->find(['title' => $query]);
+        $query = str_replace('_', ' ', $slug);
+        $found = $this->getCollection()->findOne(['title' => $query]);
+        $vertex = $this->getRepo()->createFromDb($found);
+        $this->pushHistoryStack($vertex);
+
+        return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
+    }
+
+    public function getAllMentionAction()
+    {
+        $cursor = $this->getCollection()->find([], ['title' => true]);
 
         $found = [];
-        foreach ($cursor as $item) {
-            $found[(string) $item['_id']] = $item['title'];
+        foreach ($cursor as $doc) {
+            $title = $doc['title'];
+            $found[] = ['username' => str_replace(' ', '_', $title)];
         }
 
-        return new \Symfony\Component\HttpFoundation\JsonResponse($found);
+        return new JsonResponse(['users' => $found]);
     }
 
 }

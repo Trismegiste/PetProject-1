@@ -23,7 +23,10 @@
             <argument>8</argument>
         </service>
         
-        <service id="markdown.transformer" class="Trismegiste\FrontBundle\Utils\MentionMarkdown"></service>
+        <service id="markdown.transformer" class="Trismegiste\FrontBundle\Utils\MentionMarkdown">
+            <argument type="service" id="router"/>
+            <argument>vertex_findbyslug</argument>
+        </service>
         
         <service id="twig.markdown.renderer" class="Trismegiste\FrontBundle\Utils\MarkdownExtension">
             <argument type="service" id="markdown.transformer"/>

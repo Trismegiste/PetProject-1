@@ -6,3 +6,13 @@
     {{ form(form, {action: path('vertex_edit', {id: vertex.id})}) }}
 </div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('textarea.mentionable').mention(
+            {% render(controller('TrismegisteFrontBundle:Vertex:getAllMention')) %}
+        );
+    })
+</script>
+{% endblock %}

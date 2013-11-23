@@ -28,4 +28,4 @@ assetic:
     use_controller: true
 
 dokudoki:
-    database: Sf2ffbp_%developer.name%
+    database: rpgraph_%developer.name%

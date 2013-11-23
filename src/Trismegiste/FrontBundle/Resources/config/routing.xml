@@ -22,9 +22,11 @@
 
     <route id="vertex_show" pattern="/vertex/show/{id}">
         <default key="_controller">TrismegisteFrontBundle:Vertex:show</default>
+        <requirement key="_method">GET</requirement>
+        <requirement key="id">[\da-f]{24}</requirement>
     </route>
     
-    <route id="vertex_findbytitle" pattern="/vertex/search/{query}">
-        <default key="_controller">TrismegisteFrontBundle:Vertex:ajaxFindByTitle</default>
+    <route id="vertex_findbyslug" pattern="/vertex/{slug}">
+        <default key="_controller">TrismegisteFrontBundle:Vertex:findSlug</default>
     </route>
 </routes>
