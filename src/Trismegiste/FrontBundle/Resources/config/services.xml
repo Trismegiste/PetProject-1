@@ -18,8 +18,17 @@
     </services>
     -->
     <services>
+        
         <service id="front.history" class="Trismegiste\FrontBundle\DependencyInjection\HistoryStack" public="false">
             <argument>8</argument>
         </service>
+        
+        <service id="markdown.transformer" class="Trismegiste\FrontBundle\Utils\MentionMarkdown"></service>
+        
+        <service id="twig.markdown.renderer" class="Trismegiste\FrontBundle\Utils\MarkdownExtension">
+            <argument type="service" id="markdown.transformer"/>
+            <tag name="twig.extension"/>
+        </service>
+        
     </services>
 </container>

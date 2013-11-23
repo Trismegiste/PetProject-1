@@ -7,11 +7,11 @@
     <div class="span6">
         <h2>{{ vertex.getInfoType()|capitalize }} {{ vertex.getTitle() }}</h2>
         <h3>{{ vertex.getHeadline() }}</h3>
-        {{ vertex.getDescription() }}
+        {{ vertex.getDescription()|markdown|raw }}
     </div>
     <div class="span6">
         <h2>GM only</h2>
-        {{ vertex.getGmOnly() }}
+        {{ vertex.getGmOnly()|markdown|raw }}
     </div>
     </div>
 <hr/>
