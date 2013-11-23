@@ -28,7 +28,7 @@ class Vertex extends AbstractType
 
     public function __construct()
     {
-        $typeList = ['lieu', 'pnj', 'item'];
+        $typeList = ['area', 'npc', 'item'];
         $this->choiceType = array_combine($typeList, $typeList);
     }
 
@@ -41,9 +41,8 @@ class Vertex extends AbstractType
     {
         $builder->add('infoType', 'choice', [
                     'choices' => $this->choiceType,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'disabled' => false
+                    'expanded' => true,
+                    'multiple' => false
                 ])
                 ->add('title', 'text', ['constraints' => new Assert\NotBlank(), 'required' => true])
                 ->add('headline', 'text', ['required' => false, 'attr' => ['class' => 'span6']])
@@ -64,7 +63,7 @@ class Vertex extends AbstractType
     {
         $emptyData = function (Options $options) {
                     return function (FormInterface $form) {
-                                return $form->isEmpty() && !$form->isRequired() ? null : new Model('a');
+                                return $form->isEmpty() && !$form->isRequired() ? null : new Model('undefined');
                             };
                 };
 

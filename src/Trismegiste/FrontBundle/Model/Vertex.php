@@ -25,7 +25,7 @@ class Vertex implements Persistable
 
     public function __construct($str)
     {
-        $this->title = $str;
+        $this->infoType = $str;
     }
 
 }
