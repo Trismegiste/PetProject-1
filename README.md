@@ -15,6 +15,7 @@ Practicing da web with the opensource ecosystem
  * [trismegiste/dokudoki](https://github.com/Trismegiste/DokudokiBundle) for NoSQL persistence
  * [trismegiste/php-is-magic](https://github.com/Trismegiste/Php-Is-Magic) because I'm too lazy to write getter/setter
  * [MongoDb 2.4](http://mongodb.com) because NoSQL rox
+ * Twig Form theming taken from [Silex Kitchen Edition](https://github.com/lyrixx/Silex-Kitchen-Edition)
 
 ## Some useful things
 
