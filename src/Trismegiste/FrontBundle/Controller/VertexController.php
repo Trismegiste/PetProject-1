@@ -97,8 +97,7 @@ class VertexController extends Template
 
     public function findSlugAction($slug)
     {
-        $query = str_replace('_', ' ', $slug);
-        $found = $this->getCollection()->findOne(['title' => $query]);
+        $found = $this->getCollection()->findOne(['slug' => $slug]);
         if (!is_array($found)) {
             throw $this->createNotFoundException();
         }
@@ -110,12 +109,14 @@ class VertexController extends Template
 
     public function getAllMentionAction()
     {
-        $cursor = $this->getCollection()->find([], ['title' => true]);
+        $cursor = $this->getCollection()->find([], ['title' => true, 'slug' => true]);
 
         $found = [];
         foreach ($cursor as $doc) {
-            $title = $doc['title'];
-            $found[] = ['username' => str_replace(' ', '_', $title)];
+            $found[] = [
+                'username' => $doc['slug'],
+                'name' => $doc['title']
+            ];
         }
 
         return new JsonResponse(['users' => $found]);

@@ -31,9 +31,9 @@ class MentionMarkdown extends \Michelf\Markdown
         $route = $this->baseRoute;
         return preg_replace_callback('#(^|\s)@([^\s]+)#', function($matches) use ($generator, $route) {
                     $slug = $matches[2];
-                    $human = str_replace('_', ' ', $slug);
+                    $moreReadable = str_replace('-', ' ', $slug);
                     $url = $generator->generate($route, ['slug' => $slug]);
-                    return " [$human]($url)";
+                    return " [$moreReadable]($url)";
                 }, $text);
     }
 
