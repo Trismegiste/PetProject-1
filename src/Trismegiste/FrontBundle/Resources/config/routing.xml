@@ -35,4 +35,8 @@
     <route id="vertex_findbyslug" pattern="/vertex/{slug}">
         <default key="_controller">TrismegisteFrontBundle:Vertex:findSlug</default>
     </route>
+    
+    <route id="edge_findbroken" pattern="/check/broken">
+        <default key="_controller">TrismegisteFrontBundle:Admin:brokenEdge</default>
+    </route>
 </routes>

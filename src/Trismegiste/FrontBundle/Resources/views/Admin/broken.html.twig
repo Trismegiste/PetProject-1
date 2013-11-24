@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+    <table>
+        <tbody>
+            {% for vertex in report %}
+            <tr>
+                <td><a href="{{ path('vertex_edit', {id: vertex.getId()}) }}">{{ vertex.getTitle() }}</a></td>
+                <td>
+                    <ul>
+                        {% for broken in report.getInfo() %}
+                            <li>{{ broken }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

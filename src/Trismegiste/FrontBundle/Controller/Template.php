@@ -33,6 +33,7 @@ abstract class Template extends Controller
     {
         return [
             'Create' => 'vertex_create',
+            'Check Links' => 'edge_findbroken',
             'About' => 'trismegiste_about'
         ];
     }
