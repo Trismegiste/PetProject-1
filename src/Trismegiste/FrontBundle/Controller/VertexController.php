@@ -9,6 +9,7 @@ namespace Trismegiste\FrontBundle\Controller;
 use Trismegiste\FrontBundle\Model\Vertex;
 use Trismegiste\FrontBundle\Form\Vertex as VertexForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * VertexController manages CRUD for Vertex
  */
@@ -93,6 +94,9 @@ class VertexController extends Template
     {
         $query = str_replace('_', ' ', $slug);
         $found = $this->getCollection()->findOne(['title' => $query]);
+        if (!is_array($found)) {
+            throw $this->createNotFoundException();
+        }
         $vertex = $this->getRepo()->createFromDb($found);
         $this->pushHistoryStack($vertex);
 
