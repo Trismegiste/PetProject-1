@@ -114,7 +114,7 @@ class VertexController extends Template
         $found = [];
         foreach ($cursor as $doc) {
             $found[] = [
-                'username' => $doc['slug'],
+                'username' => str_replace('-', '_', $doc['slug']),
                 'name' => $doc['title']
             ];
         }
