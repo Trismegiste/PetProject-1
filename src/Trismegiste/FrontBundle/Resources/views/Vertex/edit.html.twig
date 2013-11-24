@@ -1,10 +1,12 @@
 {% extends 'TrismegisteFrontBundle:Vertex:formbase.html.twig' %}
 
 {% block content %}
-<h2>Editer un {{ vertex.getInfoType() }}
+<h2>Edit {{ vertex.getInfoType() }} : {{ vertex.getTitle() }}
     <a href="#deleteModal" class="btn btn-danger pull-right" role="button" data-toggle="modal">
         <i class="icon-trash icon-white"></i>
-        Delete</a></h2>
+        Delete
+    </a>
+</h2>
 <div>
     {{ form(form, {action: path('vertex_edit', {id: vertex.id})}) }}
 </div>
