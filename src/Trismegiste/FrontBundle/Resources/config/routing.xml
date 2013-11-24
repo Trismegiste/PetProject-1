@@ -25,7 +25,13 @@
         <requirement key="_method">GET</requirement>
         <requirement key="id">[\da-f]{24}</requirement>
     </route>
-    
+
+    <route id="vertex_delete" pattern="/vertex/delete/{id}">
+        <default key="_controller">TrismegisteFrontBundle:Vertex:delete</default>
+        <requirement key="_method">GET</requirement>
+        <requirement key="id">[\da-f]{24}</requirement>
+    </route>
+        
     <route id="vertex_findbyslug" pattern="/vertex/{slug}">
         <default key="_controller">TrismegisteFrontBundle:Vertex:findSlug</default>
     </route>

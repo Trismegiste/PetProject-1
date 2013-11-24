@@ -121,4 +121,12 @@ class VertexController extends Template
         return new JsonResponse(['users' => $found]);
     }
 
+    public function deleteAction($id)
+    {
+        $vertex = $this->getCollection()->remove(['_id' => new \MongoId($id)]);
+        $this->pushFlash('notice', 'Vertex deleted');
+
+        return $this->redirectRouteOk('trismegiste_homepage');
+    }
+
 }
