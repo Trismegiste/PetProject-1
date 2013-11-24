@@ -1,6 +1,6 @@
 # Pet project 1
 
-Practicing da web with Github
+Practicing da web with the opensource ecosystem
 
  * KISS
  * minimal coding
@@ -12,9 +12,9 @@ Practicing da web with Github
  * [HTML5 Boilerplate with Twitter Bootstrap 2.3](http://html5boilerplate.com/)
  * [Markdown renderer](https://github.com/michelf/php-markdown)
  * [Mention.js](https://github.com/jakiestfu/Mention.js) for autocomplete with link
- * [trismegiste/dokudoki](https://github.com/Trismegiste/DokudokiBundle)
- * [trismegiste/php-is-magic](https://github.com/Trismegiste/Php-Is-Magic)
- * [MongoDb 2.4](http://mongodb.com)
+ * [trismegiste/dokudoki](https://github.com/Trismegiste/DokudokiBundle) for NoSQL persistence
+ * [trismegiste/php-is-magic](https://github.com/Trismegiste/Php-Is-Magic) because I'm too lazy to write getter/setter
+ * [MongoDb 2.4](http://mongodb.com) because NoSQL rox
 
 ## Some useful things
 
@@ -23,3 +23,5 @@ Practicing da web with Github
  * an history stack in session like the "Recently Viewed Items" of many e-commerce
  * Compiler Pass of Container for editing the service "session" of symfony
  * using fluid grid of tbs
+ * enabling magic call in symfony/form
+ * using model factory in symfony/form
