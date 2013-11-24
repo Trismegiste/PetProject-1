@@ -9,6 +9,7 @@ namespace Trismegiste\FrontBundle\Controller;
 use Trismegiste\FrontBundle\Model\Vertex;
 use Trismegiste\FrontBundle\Form\Vertex as VertexForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * VertexController manages CRUD for Vertex
@@ -49,18 +50,20 @@ class VertexController extends Template
         return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
     }
 
-    public function createAction()
+    public function createAction(Request $request)
     {
         $form = $this->createForm(new VertexForm());
 
-        if ($this->getRequest()->getMethod() == 'POST') {
-            $form->bind($this->getRequest());
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $vertex = $form->getData();
                 $this->getRepo()->persist($vertex);
                 $this->pushFlash('notice', 'Created');
 
                 return $this->redirectRouteOk('vertex_edit', ['id' => $vertex->getId()]);
+            } else {
+                $this->pushFlash('warning', 'Invalid');
             }
         }
 
@@ -69,18 +72,20 @@ class VertexController extends Template
         ]);
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
         $vertex = $this->getVertex($id);
         $form = $this->createForm(new VertexForm(), $vertex);
 
-        if ($this->getRequest()->getMethod() == 'POST') {
-            $form->bind($this->getRequest());
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getRepo()->persist($vertex);
                 $this->pushFlash('notice', 'Updated');
 
                 return $this->redirectRouteOk('vertex_edit', ['id' => $vertex->getId()]);
+            } else {
+                $this->pushFlash('warning', 'Invalid');
             }
         }
 

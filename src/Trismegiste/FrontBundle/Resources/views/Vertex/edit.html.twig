@@ -1,18 +1,8 @@
-{% extends '::base.html.twig' %}
+{% extends 'TrismegisteFrontBundle:Vertex:formbase.html.twig' %}
 
 {% block content %}
 <h2>Editer un {{ vertex.getInfoType() }}</h2>
 <div>
     {{ form(form, {action: path('vertex_edit', {id: vertex.id})}) }}
 </div>
-{% endblock %}
-
-{% block javascripts %}
-<script>
-    $(document).ready(function() {
-        $('textarea.mentionable').mention(
-            {% render(controller('TrismegisteFrontBundle:Vertex:getAllMention')) %}
-        );
-    })
-</script>
 {% endblock %}
