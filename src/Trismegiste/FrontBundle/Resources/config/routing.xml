@@ -40,7 +40,7 @@
         <default key="_controller">TrismegisteFrontBundle:Admin:brokenEdge</default>
     </route>
 
-    <route id="vertex_massinsert" pattern="/vertices/create">
+    <route id="vertex_batchcreate" pattern="/vertices/create">
         <default key="_controller">TrismegisteFrontBundle:Admin:index</default>
     </route>
 

@@ -42,9 +42,9 @@ class AdminController extends Template
 
     public function indexAction()
     {
-        $form = $this->createForm(new \Trismegiste\FrontBundle\Form\MassInsert());
+        $form = $this->createForm(new \Trismegiste\FrontBundle\Form\BatchInsert());
 
-        return $this->render('TrismegisteFrontBundle:Admin:massinsert.html.twig', [
+        return $this->render('TrismegisteFrontBundle:Admin:batchcreate.html.twig', [
                     'form' => $form->createView()
         ]);
     }

@@ -34,7 +34,7 @@ abstract class Template extends Controller
         return [
             'Create' => 'vertex_create',
             'Check Links' => 'edge_findbroken',
-            'Mass insert' => 'vertex_massinsert',
+            'Batch insert' => 'vertex_batchcreate',
             'About' => 'trismegiste_about'
         ];
     }
