@@ -6,6 +6,8 @@
 
 namespace Trismegiste\FrontBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * AdminController manages consistencies between vertices
  */
@@ -40,13 +42,32 @@ class AdminController extends Template
         return $this->render('TrismegisteFrontBundle:Admin:broken.html.twig', ['report' => $allReport]);
     }
 
-    public function indexAction()
+    public function batchAction(Request $request)
     {
         $form = $this->createForm(new \Trismegiste\FrontBundle\Form\BatchInsert());
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                foreach ($form->getData()['batch'] as $vertex) {
+                    $this->getRepo()->persist($vertex);
+                }
+                $this->pushFlash('notice', 'Created');
+
+                return $this->redirectRouteOk('trismegiste_homepage');
+            } else {
+                $this->pushFlash('warning', 'Invalid');
+            }
+        }
 
         return $this->render('TrismegisteFrontBundle:Admin:batchcreate.html.twig', [
                     'form' => $form->createView()
         ]);
+    }
+
+    public function indexAction()
+    {
+        
     }
 
 }

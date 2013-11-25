@@ -41,7 +41,7 @@
     </route>
 
     <route id="vertex_batchcreate" pattern="/vertices/create">
-        <default key="_controller">TrismegisteFrontBundle:Admin:index</default>
+        <default key="_controller">TrismegisteFrontBundle:Admin:batch</default>
     </route>
 
 </routes>

@@ -25,10 +25,11 @@ class BatchInsert extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $embed = $builder->add('Collection', 'collection', [
-            'type' => new Category(),
-            'allow_add' => true
-        ]);
+        $builder->add('batch', 'collection', [
+                    'type' => new MiniVertex(),
+                    'allow_add' => true
+                ])
+                ->add('Save', 'submit');
     }
 
 }
