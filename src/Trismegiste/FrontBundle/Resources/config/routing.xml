@@ -39,4 +39,9 @@
     <route id="edge_findbroken" pattern="/check/broken">
         <default key="_controller">TrismegisteFrontBundle:Admin:brokenEdge</default>
     </route>
+
+    <route id="vertex_massinsert" pattern="/vertices/create">
+        <default key="_controller">TrismegisteFrontBundle:Admin:index</default>
+    </route>
+
 </routes>

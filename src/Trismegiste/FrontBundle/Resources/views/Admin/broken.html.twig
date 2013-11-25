@@ -2,7 +2,11 @@
 
 {% block content %}
 <div class="row-fluid">
-    <table>
+    <h2>Checking for links based on slug</h2>
+    <table class="table">
+        <thead>
+            <tr><th>Vertex</th><th>Broken links</th></tr>
+        </thead>
         <tbody>
             {% for vertex in report %}
             <tr>

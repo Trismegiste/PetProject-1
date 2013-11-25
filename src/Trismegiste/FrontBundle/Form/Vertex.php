@@ -39,12 +39,7 @@ class Vertex extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('infoType', 'choice', [
-                    'choices' => $this->choiceType,
-                    'expanded' => true,
-                    'multiple' => false,
-                    'constraints' => new Assert\NotBlank()
-                ])
+        $builder->add('infoType', new Category())
                 ->add('title', 'text', ['constraints' => [
                         new Assert\NotBlank(),
                         new Assert\Length(['min' => 3])

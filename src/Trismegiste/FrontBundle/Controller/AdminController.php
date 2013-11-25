@@ -42,7 +42,11 @@ class AdminController extends Template
 
     public function indexAction()
     {
-        
+        $form = $this->createForm(new \Trismegiste\FrontBundle\Form\MassInsert());
+
+        return $this->render('TrismegisteFrontBundle:Admin:massinsert.html.twig', [
+                    'form' => $form->createView()
+        ]);
     }
 
 }
