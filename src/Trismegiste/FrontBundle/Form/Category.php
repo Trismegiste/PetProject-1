@@ -29,11 +29,6 @@ class Category extends AbstractType
         return "choice";
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        
-    }
-
     public function getName()
     {
         return "vertex_category";

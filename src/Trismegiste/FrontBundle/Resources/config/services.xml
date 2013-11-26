@@ -28,6 +28,10 @@
                 <argument key="item">item</argument>
             </argument>
         </service>
-        
+
+        <service id="trismegiste.vertex.mini" class="Trismegiste\FrontBundle\Form\MiniVertex">
+            <tag name="form.type" alias="minivertex"/>
+        </service>
+                
     </services>
 </container>

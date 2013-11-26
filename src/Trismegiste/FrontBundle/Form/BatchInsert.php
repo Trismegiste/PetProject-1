@@ -26,7 +26,7 @@ class BatchInsert extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('batch', 'collection', [
-                    'type' => new MiniVertex(),
+                    'type' => 'minivertex',
                     'allow_add' => true,
                     'label' => false
                 ])

@@ -30,7 +30,7 @@ class Vertex extends AbstractType
 
     public function getParent()
     {
-        return new MiniVertex();
+        return 'minivertex';
     }
 
 }
