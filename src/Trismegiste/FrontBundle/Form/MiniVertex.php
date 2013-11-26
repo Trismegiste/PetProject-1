@@ -31,7 +31,7 @@ class MiniVertex extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('infoType', new Category())
+        $builder->add('infoType', 'vertex_category')
                 ->add('title', 'text', ['constraints' => [
                         new Assert\NotBlank(),
                         new Assert\Length(['min' => 3])

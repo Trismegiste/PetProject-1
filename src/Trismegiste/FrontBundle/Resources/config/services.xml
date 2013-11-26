@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
         
@@ -18,6 +18,15 @@
         <service id="twig.markdown.renderer" class="Trismegiste\FrontBundle\Utils\MarkdownExtension">
             <argument type="service" id="markdown.transformer"/>
             <tag name="twig.extension"/>
+        </service>
+        
+        <service id="trismegiste.vertex.category" class="Trismegiste\FrontBundle\Form\Category">
+            <tag name="form.type" alias="vertex_category"/>
+            <argument type="collection">
+                <argument key="area">area</argument>
+                <argument key="npc">npc</argument>
+                <argument key="item">item</argument>
+            </argument>
         </service>
         
     </services>

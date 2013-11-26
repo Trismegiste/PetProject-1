@@ -49,14 +49,16 @@ class AdminController extends Template
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                $cpt = 0;
                 foreach ($form->getData()['batch'] as $vertex) {
                     $this->getRepo()->persist($vertex);
+                    $cpt++;
                 }
-                $this->pushFlash('notice', 'Created');
+                $this->pushFlash('notice', "$cpt vertices were inserted");
 
                 return $this->redirectRouteOk('trismegiste_homepage');
             } else {
-                $this->pushFlash('warning', 'Invalid');
+                $this->pushFlash('warning', 'Invalid submitted entry');
             }
         }
 

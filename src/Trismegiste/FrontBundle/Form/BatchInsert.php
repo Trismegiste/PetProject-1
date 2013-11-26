@@ -27,7 +27,8 @@ class BatchInsert extends AbstractType
     {
         $builder->add('batch', 'collection', [
                     'type' => new MiniVertex(),
-                    'allow_add' => true
+                    'allow_add' => true,
+                    'label' => false
                 ])
                 ->add('Save', 'submit');
     }

@@ -19,10 +19,9 @@ class Category extends AbstractType
 
     protected $choiceType;
 
-    public function __construct()
+    public function __construct(array $typeList)
     {
-        $typeList = ['area', 'npc', 'item'];
-        $this->choiceType = array_combine($typeList, $typeList);
+        $this->choiceType = $typeList;
     }
 
     public function getParent()
