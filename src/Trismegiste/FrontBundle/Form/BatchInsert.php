@@ -8,9 +8,6 @@ namespace Trismegiste\FrontBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Trismegiste\FrontBundle\Model\Vertex as Model;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BatchInsert is a form for batch insert of vertices
@@ -28,7 +25,8 @@ class BatchInsert extends AbstractType
         $builder->add('batch', 'collection', [
                     'type' => 'minivertex',
                     'allow_add' => true,
-                    'label' => false
+                    'label' => false,
+                    'options' => ['label_attr' => ['class' => 'hide']]
                 ])
                 ->add('Save', 'submit');
     }
