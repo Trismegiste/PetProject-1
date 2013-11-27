@@ -28,6 +28,7 @@ twig:
     form:
         resources:
             - '::form_tbs.html.twig'
+            - 'TrismegisteFrontBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
