@@ -133,7 +133,12 @@ class VertexController extends Template
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('keyword');
-        $cursor = $this->getCollection()->find(['title' => ['$regex' => new \MongoRegex("/$keyword/i")]]);
+        $regex = new \MongoRegex("/$keyword/i");
+        $cursor = $this->getCollection()->find(['$or' => [
+                ['title' => ['$regex' => $regex]],
+                ['description' => ['$regex' => $regex]],
+                ['gmOnly' => ['$regex' => $regex]]
+        ]]);
 
         $vertex = [];
         foreach ($cursor as $doc) {
