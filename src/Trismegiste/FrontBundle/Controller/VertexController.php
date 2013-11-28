@@ -130,4 +130,18 @@ class VertexController extends Template
         return $this->redirectRouteOk('trismegiste_homepage');
     }
 
+    public function searchAction(Request $request)
+    {
+        $keyword = $request->query->get('keyword');
+        $cursor = $this->getCollection()->find(['title' => ['$regex' => new \MongoRegex("/$keyword/i")]]);
+
+        $vertex = [];
+        foreach ($cursor as $doc) {
+            $obj = $this->getRepo()->createFromDb($doc);
+            $vertex[$obj->getInfoType()][] = $obj;
+        }
+
+        return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);
+    }
+
 }
