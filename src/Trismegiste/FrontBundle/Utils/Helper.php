@@ -26,4 +26,24 @@ class Helper
         return preg_replace('#[^-\w]#', '', $str);
     }
 
+    static public function slugToReadable($str)
+    {
+        return str_replace('-', ' ', $str);
+    }
+
+    static public function mentionToReadable($str)
+    {
+        return str_replace('_', ' ', $str);
+    }
+
+    static public function slugToMention($str)
+    {
+        return str_replace('-', '_', $str);
+    }
+
+    static public function mentionToSlug($str)
+    {
+        return str_replace('_', '-', $str);
+    }
+
 }

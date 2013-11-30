@@ -7,6 +7,7 @@
 namespace Trismegiste\FrontBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Trismegiste\FrontBundle\Utils\Helper;
 
 /**
  * AdminController manages consistencies between vertices
@@ -26,7 +27,7 @@ class AdminController extends Template
                 preg_match_all('#@([_\w]+)#', $vertex[$field], $extract);
 
                 foreach ($extract[1] as $edge) {
-                    $found = $this->getCollection()->findOne(['slug' => str_replace('_', '-', $edge)]);
+                    $found = $this->getCollection()->findOne(['slug' => Helper::mentionToSlug($edge)]);
                     if (empty($found)) {
                         $report[] = $edge;
                     }

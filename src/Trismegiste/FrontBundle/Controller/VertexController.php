@@ -10,6 +10,7 @@ use Trismegiste\FrontBundle\Model\Vertex;
 use Trismegiste\FrontBundle\Form\Vertex as VertexForm;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Trismegiste\FrontBundle\Utils\Helper;
 
 /**
  * VertexController manages CRUD for Vertex
@@ -98,13 +99,23 @@ class VertexController extends Template
     public function findSlugAction($slug)
     {
         $found = $this->getCollection()->findOne(['slug' => $slug]);
-        if (!is_array($found)) {
-            throw $this->createNotFoundException();
-        }
-        $vertex = $this->getRepo()->createFromDb($found);
-        $this->pushHistoryStack($vertex);
 
-        return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
+        if (!is_array($found)) {
+            $vertex = new Vertex('undefined');
+            $vertex->setTitle(Helper::slugToReadable($slug));
+            $form = $this->createForm(new VertexForm(), $vertex);
+            $this->pushFlash('warning', "$slug does not exist, would you like to create it ?");
+
+            return $this->render('TrismegisteFrontBundle:Vertex:create.html.twig', [
+                        'vertex' => $vertex,
+                        'form' => $form->createView()
+            ]);
+        } else {
+            $vertex = $this->getRepo()->createFromDb($found);
+            $this->pushHistoryStack($vertex);
+
+            return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
+        }
     }
 
     public function getAllMentionAction()
@@ -114,7 +125,7 @@ class VertexController extends Template
         $found = [];
         foreach ($cursor as $doc) {
             $found[] = [
-                'username' => str_replace('-', '_', $doc['slug']),
+                'username' => Helper::slugToMention($doc['slug']),
                 'name' => $doc['title']
             ];
         }
