@@ -25,7 +25,7 @@ class VertexController extends Template
 
     public function indexAction()
     {
-        $cursor = $this->getCollection()->find();
+        $cursor = $this->getRepo()->find();
 
         $vertex = [];
         foreach ($cursor as $doc) {
@@ -98,9 +98,9 @@ class VertexController extends Template
 
     public function findSlugAction($slug)
     {
-        $found = $this->getCollection()->findOne(['slug' => $slug]);
+        $vertex = $this->getRepo()->findOne(['slug' => $slug]);
 
-        if (!is_array($found)) {
+        if (is_null($vertex)) {
             $vertex = new Vertex('undefined');
             $vertex->setTitle(Helper::slugToReadable($slug));
             $form = $this->createForm(new VertexForm(), $vertex);
@@ -111,7 +111,6 @@ class VertexController extends Template
                         'form' => $form->createView()
             ]);
         } else {
-            $vertex = $this->getRepo()->createFromDb($found);
             $this->pushHistoryStack($vertex);
 
             return $this->render('TrismegisteFrontBundle:Vertex:show.html.twig', ['vertex' => $vertex]);
@@ -120,7 +119,7 @@ class VertexController extends Template
 
     public function getAllMentionAction()
     {
-        $cursor = $this->getCollection()->find([], ['title' => true, 'slug' => true]);
+        $cursor = $this->getRepo()->find([], ['title' => true, 'slug' => true]);
 
         $found = [];
         foreach ($cursor as $doc) {
@@ -145,7 +144,7 @@ class VertexController extends Template
     {
         $keyword = $request->query->get('keyword');
         $regex = new \MongoRegex("/$keyword/i");
-        $cursor = $this->getCollection()->find(['$or' => [
+        $cursor = $this->getRepo()->find(['$or' => [
                 ['title' => ['$regex' => $regex]],
                 ['description' => ['$regex' => $regex]],
                 ['gmOnly' => ['$regex' => $regex]]
