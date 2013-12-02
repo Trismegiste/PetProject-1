@@ -33,5 +33,9 @@
             <tag name="form.type" alias="minivertex"/>
         </service>
                 
+        <service id="repository.vertex" class="Trismegiste\FrontBundle\Model\VertexRepo">
+            <argument type="service" id="dokudoki.repository"/>
+        </service>
+        
     </services>
 </container>
