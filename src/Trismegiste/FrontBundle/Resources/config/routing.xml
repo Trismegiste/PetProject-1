@@ -48,5 +48,15 @@
     <route id="vertex_findbyslug" pattern="/vertex/{slug}">
         <default key="_controller">TrismegisteFrontBundle:Vertex:findSlug</default>
     </route>
+
+    <route id="graph_create" pattern="/graph/create">
+        <default key="_controller">TrismegisteFrontBundle:Graph:create</default>
+    </route>
     
+    <route id="graph_select" pattern="/graph/select/{id}">
+        <default key="_controller">TrismegisteFrontBundle:Graph:select</default>
+        <requirement key="_method">GET</requirement>
+        <requirement key="id">[\da-f]{24}</requirement>
+    </route>
+
 </routes>

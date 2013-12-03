@@ -4,6 +4,7 @@ namespace Trismegiste\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Trismegiste\FrontBundle\Model\Graph;
 
 /**
  * Design pattern : Template Method
@@ -64,6 +65,16 @@ abstract class Template extends Controller
     protected function redirectRouteOk($name, $param = [])
     {
         return $this->redirect($this->generateUrl($name, $param));
+    }
+
+    protected function getWorkingDoc()
+    {
+        return $this->get('session')->get('working_doc');
+    }
+
+    protected function setWorkingDoc(Graph $doc)
+    {
+        $this->get('session')->set('working_doc', $doc);
     }
 
 }

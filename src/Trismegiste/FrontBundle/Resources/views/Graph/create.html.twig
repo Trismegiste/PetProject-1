@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<h2>New graph</h2>
+<div>
+    {{ form(form, {action: path('graph_create')}) }}
+</div>
+{% endblock %}
