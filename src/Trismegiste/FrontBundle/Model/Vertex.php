@@ -24,6 +24,7 @@ class Vertex implements Persistable
     protected $description;
     protected $gmOnly;
     protected $slug;
+    protected $graphId;
 
     public function __construct($str)
     {

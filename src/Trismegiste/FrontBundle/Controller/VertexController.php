@@ -28,7 +28,7 @@ class VertexController extends Template
         $vertex = [];
 
         if (!is_null($graph = $this->getWorkingDoc())) {
-            $cursor = $this->getRepo()->findByGraph((string) $graph->getId());
+            $cursor = $this->getRepo()->findByGraph($graph->getId());
 
             foreach ($cursor as $doc) {
                 $obj = $this->getRepo()->createFromDb($doc);
@@ -62,6 +62,7 @@ class VertexController extends Template
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $vertex = $form->getData();
+                $vertex->setGraphId($this->getWorkingDoc()->getId());
                 $this->getRepo()->persist($vertex);
                 $this->pushFlash('notice', 'Created');
 
@@ -101,7 +102,7 @@ class VertexController extends Template
 
     public function findSlugAction($slug)
     {
-        $vertex = $this->getRepo()->findSlugInGraph(666, $slug);
+        $vertex = $this->getRepo()->findSlugInGraph($this->getGraphFilter(), $slug);
 
         if (is_null($vertex)) {
             $vertex = new Vertex('undefined');
@@ -122,7 +123,7 @@ class VertexController extends Template
 
     public function getAllMentionAction()
     {
-        $found = $this->getRepo()->getMentionByGraph(666);
+        $found = $this->getRepo()->getMentionByGraph($this->getGraphFilter());
 
         return new JsonResponse(['users' => $found]);
     }
@@ -138,7 +139,7 @@ class VertexController extends Template
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('keyword');
-        $cursor = $this->getRepo()->searchTextInGraph(666, $keyword);
+        $cursor = $this->getRepo()->searchTextInGraph($this->getGraphFilter(), $keyword);
 
         $vertex = [];
         foreach ($cursor as $doc) {

@@ -77,4 +77,10 @@ abstract class Template extends Controller
         $this->get('session')->set('working_doc', $doc);
     }
 
+    protected function getGraphFilter()
+    {
+        $current = $this->get('session')->get('working_doc');
+        return (!is_null($current)) ? $current->getId() : '';
+    }
+
 }

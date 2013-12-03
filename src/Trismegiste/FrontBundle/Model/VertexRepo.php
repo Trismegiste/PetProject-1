@@ -35,7 +35,7 @@ class VertexRepo extends Decorator
     public function findByGraph($fk, array $fields = [])
     {
         // filters on one graph
-        $query['graph_id'] = $fk;
+        $query['graphId'] = $fk;
 
         return $this->find($query, $fields);
     }
@@ -44,7 +44,7 @@ class VertexRepo extends Decorator
     {
         $query = [
             'slug' => $slug,
-            'graph_id' => $fk
+            'graphId' => $fk
         ];
 
         return $this->findOne($query);
@@ -69,7 +69,7 @@ class VertexRepo extends Decorator
     {
         $regex = new \MongoRegex("/$keyword/i");
         $cursor = $this->find([
-            'graph_id' => $fk,
+            'graphId' => $fk,
             '$or' => [
                 ['title' => ['$regex' => $regex]],
                 ['description' => ['$regex' => $regex]],
