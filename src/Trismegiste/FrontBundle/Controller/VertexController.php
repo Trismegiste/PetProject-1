@@ -25,7 +25,7 @@ class VertexController extends Template
 
     public function indexAction()
     {
-        $cursor = $this->getRepo()->find();
+        $cursor = $this->getRepo()->findByGraph(666);
 
         $vertex = [];
         foreach ($cursor as $doc) {
@@ -98,7 +98,7 @@ class VertexController extends Template
 
     public function findSlugAction($slug)
     {
-        $vertex = $this->getRepo()->findOne(['slug' => $slug]);
+        $vertex = $this->getRepo()->findSlugInGraph(666, $slug);
 
         if (is_null($vertex)) {
             $vertex = new Vertex('undefined');
@@ -119,15 +119,7 @@ class VertexController extends Template
 
     public function getAllMentionAction()
     {
-        $cursor = $this->getRepo()->find([], ['title' => true, 'slug' => true]);
-
-        $found = [];
-        foreach ($cursor as $doc) {
-            $found[] = [
-                'username' => Helper::slugToMention($doc['slug']),
-                'name' => $doc['title']
-            ];
-        }
+        $found = $this->getRepo()->getMentionByGraph(666);
 
         return new JsonResponse(['users' => $found]);
     }
@@ -143,12 +135,7 @@ class VertexController extends Template
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('keyword');
-        $regex = new \MongoRegex("/$keyword/i");
-        $cursor = $this->getRepo()->find(['$or' => [
-                ['title' => ['$regex' => $regex]],
-                ['description' => ['$regex' => $regex]],
-                ['gmOnly' => ['$regex' => $regex]]
-        ]]);
+        $cursor = $this->getRepo()->searchTextInGraph(666,$keyword);
 
         $vertex = [];
         foreach ($cursor as $doc) {

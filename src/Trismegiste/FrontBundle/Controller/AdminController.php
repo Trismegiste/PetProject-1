@@ -18,7 +18,7 @@ class AdminController extends Template
     public function brokenEdgeAction()
     {
         $allReport = new \SplObjectStorage();
-        $cursor = $this->getRepo()->find();
+        $cursor = $this->getRepo()->findByGraph(666);
         foreach ($cursor as $vertex) {
             $report = [];
             foreach (['description', 'gmOnly'] as $field) {
@@ -27,7 +27,7 @@ class AdminController extends Template
                 preg_match_all('#@([_\w]+)#', $vertex[$field], $extract);
 
                 foreach ($extract[1] as $edge) {
-                    $found = $this->getRepo()->findOne(['slug' => Helper::mentionToSlug($edge)]);
+                    $found = $this->getRepo()->findSlugInGraph(666, Helper::mentionToSlug($edge));
                     if (empty($found)) {
                         $report[] = $edge;
                     }
