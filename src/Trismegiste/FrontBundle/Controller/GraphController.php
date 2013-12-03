@@ -37,11 +37,11 @@ class GraphController extends Template
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $vertex = $form->getData();
-                $this->getRepo()->persist($vertex);
+                $graph = $form->getData();
+                $this->getRepo()->persist($graph);
                 $this->pushFlash('notice', 'Created');
 
-                return $this->redirectRouteOk('graph_select', ['id' => (string) $vertex->getId()]);
+                return $this->redirectRouteOk('graph_select', ['id' => (string) $graph->getId()]);
             } else {
                 $this->pushFlash('warning', 'Invalid');
             }

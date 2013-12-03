@@ -26,7 +26,7 @@ class Graph extends AbstractType
 
     public function getName()
     {
-        return "minivertex";
+        return "graph";
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

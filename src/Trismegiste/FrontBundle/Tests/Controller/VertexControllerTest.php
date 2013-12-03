@@ -14,11 +14,40 @@ class VertexControllerTest extends WebTestCase
         static::$client = static::createClient();
     }
 
-    public function testIndex()
+    protected function tearDown()
+    {
+        //don't shutdown the kernel
+    }
+
+    public function testStartGraph()
     {
         $client = static::$client;
         $client->getContainer()->get('dokudoki.collection')->drop();
 
+        $crawler = $client->request('GET', '/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $create = $crawler->selectLink('Add new...')->link();
+        $client->click($create);
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+
+    public function testCreateGraph()
+    {
+        $client = static::$client;
+        $crawler = $client->request('GET', '/graph/create');
+        $form = $crawler->selectButton('Save')->form();
+        $crawler = $client->submit($form, ['graph' => ['title' => 'Star Trek']]);
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $crawler = $client->followRedirect();
+        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Created")')->count(),$client->getResponse()->getContent());
+        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Graph Star Trek")')->count());
+    }
+
+    public function testIndex()
+    {
+        $client = static::$client;
+        $this->assertTrue($client->getContainer()->get('session')->has('working_doc'));
         $crawler = $client->request('GET', '/');
         $this->assertTrue($client->getResponse()->isSuccessful());
         $create = $crawler->selectLink('Create')->link();
