@@ -18,10 +18,7 @@
                     {% block additional %}{% endblock %}
                 </ul>
                 {% endblock %}
-                {% block authentication %}
-                {% include '::security.html.twig' %}
-                {% endblock %}
-                <form class="navbar-form pull-left" method="GET" action="{{ path('vertex_search') }}">
+                <form class="navbar-form pull-right" method="GET" action="{{ path('vertex_search') }}">
                     <input class="span2" type="text" placeholder="type a keyword..." name="keyword"/>
                     <button type="submit" class="btn">Search</button>
                 </form>                    

@@ -41,7 +41,7 @@ class GraphController extends Template
                 $this->getRepo()->persist($vertex);
                 $this->pushFlash('notice', 'Created');
 
-                return $this->redirectRouteOk('trismegiste_homepage');
+                return $this->redirectRouteOk('graph_select', ['id' => (string) $vertex->getId()]);
             } else {
                 $this->pushFlash('warning', 'Invalid');
             }
