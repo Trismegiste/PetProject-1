@@ -25,12 +25,15 @@ class VertexController extends Template
 
     public function indexAction()
     {
-        $cursor = $this->getRepo()->findByGraph(666);
-
         $vertex = [];
-        foreach ($cursor as $doc) {
-            $obj = $this->getRepo()->createFromDb($doc);
-            $vertex[$obj->getInfoType()][] = $obj;
+
+        if (!is_null($graph = $this->getWorkingDoc())) {
+            $cursor = $this->getRepo()->findByGraph((string) $graph->getId());
+
+            foreach ($cursor as $doc) {
+                $obj = $this->getRepo()->createFromDb($doc);
+                $vertex[$obj->getInfoType()][] = $obj;
+            }
         }
 
         return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);
@@ -135,7 +138,7 @@ class VertexController extends Template
     public function searchAction(Request $request)
     {
         $keyword = $request->query->get('keyword');
-        $cursor = $this->getRepo()->searchTextInGraph(666,$keyword);
+        $cursor = $this->getRepo()->searchTextInGraph(666, $keyword);
 
         $vertex = [];
         foreach ($cursor as $doc) {
