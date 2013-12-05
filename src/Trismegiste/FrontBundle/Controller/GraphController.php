@@ -58,6 +58,7 @@ class GraphController extends Template
                 ->findByPk($id);
 
         $this->setWorkingDoc($graph);
+        $this->get('session')->getBag('history')->clear();
         $this->pushFlash('notice', 'Working document is now : Graph ' . $graph->getTitle());
 
         return $this->redirectRouteOk('trismegiste_homepage');
