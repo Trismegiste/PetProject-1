@@ -36,6 +36,7 @@ class VertexRepo extends Decorator
     {
         // filters on one graph
         $query['graphId'] = $fk;
+        $query[MapObject::FQCN_KEY] = __NAMESPACE__ . '\Vertex';
 
         return $this->getCursor($query, $fields);
     }
