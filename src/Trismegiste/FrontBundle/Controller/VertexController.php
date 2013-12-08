@@ -143,8 +143,7 @@ class VertexController extends Template
 
         $vertex = [];
         foreach ($cursor as $doc) {
-            $obj = $this->getRepo()->createFromDb($doc);
-            $vertex[$obj->getInfoType()][] = $obj;
+            $vertex[$doc->getInfoType()][] = $doc;
         }
 
         return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);

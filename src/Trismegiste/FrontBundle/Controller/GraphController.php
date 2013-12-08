@@ -19,11 +19,7 @@ class GraphController extends Template
     {
         $cursor = $this->get('dokudoki.repository')
                 ->find(['-fqcn' => 'Trismegiste\FrontBundle\Model\Graph']);
-        $graph = [];
-        foreach ($cursor as $doc) {
-            $graph[] = $this->get('dokudoki.repository')
-                    ->createFromDb($doc);
-        }
+        $graph = iterator_to_array($cursor);
 
         return $this->render('TrismegisteFrontBundle:Graph:select.html.twig', [
                     'graph' => $graph

@@ -16,20 +16,20 @@ use Trismegiste\FrontBundle\Utils\Helper;
 class VertexRepo extends Decorator
 {
 
-    public function find(array $query = array(), array $fields = array())
+    public function find(array $query = array())
     {
         // forces the type
         $query[MapObject::FQCN_KEY] = __NAMESPACE__ . '\Vertex';
 
-        return parent::find($query, $fields);
+        return parent::find($query);
     }
 
-    public function findOne(array $query = array(), array $fields = array())
+    public function findOne(array $query = array())
     {
         // forces the type of document
         $query[MapObject::FQCN_KEY] = __NAMESPACE__ . '\Vertex';
 
-        return parent::findOne($query, $fields);
+        return parent::findOne($query);
     }
 
     public function findByGraph($fk, array $fields = [])
@@ -37,7 +37,7 @@ class VertexRepo extends Decorator
         // filters on one graph
         $query['graphId'] = $fk;
 
-        return $this->find($query, $fields);
+        return $this->getCursor($query, $fields);
     }
 
     public function findSlugInGraph($fk, $slug)
