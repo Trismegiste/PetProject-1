@@ -40,7 +40,7 @@ class VertexControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
         $crawler = $client->followRedirect();
-        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Created")')->count(),$client->getResponse()->getContent());
+        $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Created")')->count(), $client->getResponse()->getContent());
         $this->assertEquals(1, $crawler->filter('div.alert-success:contains("Graph Star Trek")')->count());
     }
 
@@ -114,6 +114,22 @@ class VertexControllerTest extends WebTestCase
         $client = static::$client;
         $crawler = $client->request('GET', '/check/broken');
         $this->assertEquals(1, $crawler->filter('tbody tr td:contains("notfound")')->count());
+    }
+
+    public function testSlug()
+    {
+        $client = static::$client;
+        $crawler = $client->request('GET', '/vertex/Spock');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(1, $crawler->filter('h2:contains("Npc Spock")')->count());
+    }
+
+    public function testSlugNotFound()
+    {
+        $client = static::$client;
+        $crawler = $client->request('GET', '/vertex/Kirk');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(1, $crawler->filter('div.alert-error:contains("Kirk does not exist")')->count());
     }
 
 }
