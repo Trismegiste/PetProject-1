@@ -70,17 +70,19 @@ class GraphController extends Template
     public function getAllNodeAction()
     {
         $cursor = $this->getRepo()->findByGraph($this->getGraphFilter());
-        $nodes = [];
-        $links = [];
 
+        // process nodes list
+        $nodes = [];
         $shortcut = [];
         $index = 0;
         foreach ($cursor as $doc) {
-            $nodes[$index] = ['name' => $doc['title'], 'group' => 1];
+            $nodes[$index] = ['name' => $doc['title'], 'group' => 1, 'icon' => $doc['infoType']];
             $shortcut[$doc['slug']] = ['idx' => $index, 'edge' => $doc['description'] . ' ' . $doc['gmOnly']];
             $index++;
         }
 
+        // process links list
+        $links = [];
         foreach ($shortcut as $doc) {
 
             $extract = [];
