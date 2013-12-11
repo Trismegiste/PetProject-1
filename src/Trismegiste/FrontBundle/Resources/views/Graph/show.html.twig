@@ -26,7 +26,7 @@
 
     <script>
 
-        var width = 960, height = 500;
+        var width = $("#grafx").width(), height = 600;
 
         var svg = d3.select("#grafx").append("svg")
                 .attr("width", width)
@@ -34,7 +34,7 @@
 
         var force = d3.layout.force()
                 .gravity(.05)
-                .distance(100)
+                .distance(150)
                 .charge(-100)
                 .size([width, height]);
 
