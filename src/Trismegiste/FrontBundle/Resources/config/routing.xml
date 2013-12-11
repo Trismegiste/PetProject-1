@@ -59,4 +59,14 @@
         <requirement key="id">[\da-f]{24}</requirement>
     </route>
 
+    <route id="graph_show_2d" pattern="/graph/show">
+        <default key="_controller">TrismegisteFrontBundle:Graph:show</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+    
+    <route id="graph_get_nodes" pattern="/graph/nodes/all">
+        <default key="_controller">TrismegisteFrontBundle:Graph:getAllNode</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+
 </routes>
