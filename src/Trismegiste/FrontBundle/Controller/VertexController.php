@@ -29,6 +29,7 @@ class VertexController extends Template
 
         if (!is_null($graph = $this->getWorkingDoc())) {
             $cursor = $this->getRepo()->findByGraph($graph->getId());
+            $cursor->sort(['title' => 1]);
 
             foreach ($cursor as $doc) {
                 $obj = $this->getRepo()->createFromDb($doc);

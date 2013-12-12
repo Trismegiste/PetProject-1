@@ -9,6 +9,7 @@ namespace Trismegiste\FrontBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * DocGeneratorCommand is a CLI which generates a full doc for one graph
@@ -19,7 +20,8 @@ class DocGeneratorCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('graph:generate')
-                ->setDescription('DocGenerator is a CLI which generates a full doc for one graph');
+                ->setDescription('DocGenerator is a CLI which generates a full doc for one graph')
+                ->addArgument('filename', InputArgument::REQUIRED, "html filename to generate");
     }
 
     private function getRepo()
@@ -52,10 +54,10 @@ class DocGeneratorCommand extends ContainerAwareCommand
                     return $keyMap[$answer];
                 });
 
-        $this->exportGraph($output, $pkGraph);
+        $this->exportGraph($output, $pkGraph, $input->getArgument('filename'));
     }
 
-    protected function exportGraph(OutputInterface $output, $pkGraph)
+    protected function exportGraph(OutputInterface $output, $pkGraph, $filename)
     {
         $graph = $this->getRepo()->findByPk($pkGraph);
         $output->writeln("Exporting " . $graph->getTitle());
@@ -63,6 +65,8 @@ class DocGeneratorCommand extends ContainerAwareCommand
         $cursor = $this->getContainer()
                 ->get('repository.vertex')
                 ->findByGraph($graph->getId());
+        $cursor->sort(['title' => 1]);
+
         $vertex = [];
         foreach ($cursor as $doc) {
             $obj = $this->getRepo()->createFromDb($doc);
@@ -76,14 +80,14 @@ class DocGeneratorCommand extends ContainerAwareCommand
             'docTitle' => $graph->getTitle()
         ]);
 
-        // replacing links (injecting another UrlGenerator in MentionMarkdown should be nice)
+        // replacing links (injecting another UrlGenerator in MentionMarkdown would be nice)
         $content = preg_replace_callback('#href="/vertex/([^"]+)"#', function($extract) {
                     return "href=\"#{$extract[1]}\"";
                 }, $content);
 
         $this->getContainer()
                 ->get('filesystem')
-                ->dumpFile('web/result.html', $content);
+                ->dumpFile("web/" . $filename . ".html", $content);
     }
 
 }

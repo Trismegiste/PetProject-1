@@ -23,17 +23,16 @@
                     <a name="{{ item.getSlug() }}"></a>
                     <h2>{{ item.getTitle() }}</h2>
                     <h3>{{ item.getHeadline() }}</h3>
-                {{ item.getDescription()|markdown|raw }}
+                    {{ item.getDescription()|markdown|raw }}
                 </div>
                 <div class="span6">
                     <h2>GM only</h2>
-                {{ item.getGmOnly()|markdown|raw }}
+                    {{ item.getGmOnly()|markdown|raw }}
                 </div>
             </div>
     {% endfor %}
+            <hr/>
 {% endfor %}
-
-        <hr/>
         <footer>
             <p>&copy; Trismegiste 2013</p>
         </footer>
