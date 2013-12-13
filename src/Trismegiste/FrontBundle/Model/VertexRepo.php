@@ -81,4 +81,19 @@ class VertexRepo extends Decorator
         return $cursor;
     }
 
+    public function searchMentionInGraph($fk, Vertex $v)
+    {
+        $keyword = '@' . Helper::slugToMention($v->getSlug());
+        $regex = new \MongoRegex("/$keyword/");
+        $cursor = $this->find([
+            'graphId' => $fk,
+            '$or' => [
+                ['description' => ['$regex' => $regex]],
+                ['gmOnly' => ['$regex' => $regex]]
+            ]
+        ]);
+
+        return $cursor;
+    }
+
 }

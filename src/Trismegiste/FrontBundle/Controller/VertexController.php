@@ -150,4 +150,11 @@ class VertexController extends Template
         return $this->render('TrismegisteFrontBundle:Vertex:index.html.twig', ['vertex' => $vertex]);
     }
 
+    public function getBackLinkAction(Vertex $vertex)
+    {
+        $backlink = $this->getRepo()->searchMentionInGraph($this->getGraphFilter(), $vertex);
+
+        return $this->render('TrismegisteFrontBundle:Vertex:backlink.html.twig', ['backlink' => $backlink]);
+    }
+
 }

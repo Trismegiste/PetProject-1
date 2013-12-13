@@ -132,4 +132,13 @@ class VertexControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('div.alert-error:contains("Kirk does not exist")')->count());
     }
 
+    /**
+     * @test
+     */
+    public function checkBatchInsert()
+    {
+        $crawler = static::$client->request('GET', '/vertices/create');
+        $form = $crawler->selectButton('Save')->form();
+    }
+
 }

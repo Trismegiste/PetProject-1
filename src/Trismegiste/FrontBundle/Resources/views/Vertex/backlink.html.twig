@@ -1,0 +1,9 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h4>Mention</h4>
+            {% for vertex in backlink %}
+                {% if not loop.first %}|{% endif %}
+        <a href="{{ path('vertex_show', {id: vertex.getId()}) }}">{{ vertex.getTitle() }}</a>
+            {% endfor %}
+    </div>
+</div>
