@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-
+use Trismegiste\FrontBundle\Utils\MentionMarkdown;
+use Trismegiste\FrontBundle\Utils\InternalMentionLink;
+use Trismegiste\FrontBundle\Utils\MarkdownExtension;
 /**
  * DocGeneratorCommand is a CLI which generates a full doc for one graph
  */
@@ -73,17 +75,15 @@ class DocGeneratorCommand extends ContainerAwareCommand
             $vertex[$obj->getInfoType()][] = $obj;
         }
 
-        $content = $this->getContainer()
-                ->get('twig')
-                ->render('TrismegisteFrontBundle:Command:full_doc.html.twig', [
+        $twig = $this->getContainer()->get('twig');
+        // override the markdown filter with a new instance with a fake url generator
+        // Here is a successful use of the Dependency Inversion Principle
+        $twig->addExtension(new MarkdownExtension(new MentionMarkdown(new InternalMentionLink(), 'vertex_findbyslug')));
+
+        $content = $twig->render('TrismegisteFrontBundle:Command:full_doc.html.twig', [
             'vertex' => $vertex,
             'docTitle' => $graph->getTitle()
         ]);
-
-        // replacing links (injecting another UrlGenerator in MentionMarkdown would be nice)
-        $content = preg_replace_callback('#href="/vertex/([^"]+)"#', function($extract) {
-                    return "href=\"#{$extract[1]}\"";
-                }, $content);
 
         $this->getContainer()
                 ->get('filesystem')
