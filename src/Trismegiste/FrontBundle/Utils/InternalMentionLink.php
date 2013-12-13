@@ -27,11 +27,17 @@ class InternalMentionLink implements UrlGeneratorInterface
         return "#404notfound";
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getContext()
     {
         
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setContext(\Symfony\Component\Routing\RequestContext $context)
     {
         

@@ -35,4 +35,28 @@ class GraphControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('div.alert-error:contains("Invalid")')->count());
     }
 
+    public function testGraphicalView()
+    {
+        // select test graph
+        $crawler = $this->client->request('GET', '/');
+        $link = $crawler->filter('a:contains("Star Trek")')->eq(0)->link();
+        $crawler = $this->client->click($link);
+        // view graphx
+        $crawler = $this->client->request('GET', '/graph/show');
+        $this->assertRegExp('#d3\.v3\.min\.js#', $this->client->getResponse()->getContent());
+        // call ajax
+        $crawler = $this->client->request('GET', '/graph/nodes/all');
+        $this->assertEquals(array(
+            'nodes' => array(
+                0 => array(
+                    'name' => 'Spock',
+                    'group' => 1,
+                    'icon' => 'npc',
+                ),
+            ),
+            'links' => array(),
+                ), json_decode($this->client->getResponse()->getContent(), true)
+        );
+    }
+
 }

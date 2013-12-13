@@ -35,8 +35,7 @@ class DocGeneratorTest extends WebTestCase
         // registers the command of this bundle
         $b = $this->application->getKernel()->getBundle('TrismegisteFrontBundle');
         $b->registerCommands($this->application);
-        // I don't know how but ContainerAwareCommand are injected with the container of the app
-        // somehow it works
+        // the command manages itself to get the container with the application
     }
 
     public function testGeneration()

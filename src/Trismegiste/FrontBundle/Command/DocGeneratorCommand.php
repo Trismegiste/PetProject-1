@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Trismegiste\FrontBundle\Utils\MentionMarkdown;
 use Trismegiste\FrontBundle\Utils\InternalMentionLink;
 use Trismegiste\FrontBundle\Utils\MarkdownExtension;
+
 /**
  * DocGeneratorCommand is a CLI which generates a full doc for one graph
  */
