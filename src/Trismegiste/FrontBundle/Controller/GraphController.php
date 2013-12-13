@@ -76,7 +76,12 @@ class GraphController extends Template
         $shortcut = [];
         $index = 0;
         foreach ($cursor as $doc) {
-            $nodes[$index] = ['name' => $doc['title'], 'group' => 1, 'icon' => $doc['infoType']];
+            $nodes[$index] = [
+                'name' => $doc['title'],
+                'group' => 1,
+                'icon' => $doc['infoType'],
+                'href' => $this->generateUrl('vertex_show', ['id' => (string) $doc['_id']])
+            ];
             $shortcut[$doc['slug']] = ['idx' => $index, 'edge' => $doc['description'] . ' ' . $doc['gmOnly']];
             $index++;
         }

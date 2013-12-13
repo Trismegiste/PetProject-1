@@ -53,12 +53,13 @@
                     .data(json.nodes)
                     .enter().append("g")
                     .attr("class", "node")
+                    .on("dblclick", followlink)
                     .call(force.drag);
 
             node.append("image")
                     .attr("xlink:href", function(d) {
-                        return "/bundles/trismegistefront/img/icon-" + d.icon + ".png";
-                    })
+                return "/bundles/trismegistefront/img/icon-" + d.icon + ".png";
+            })
                     .attr("x", -8)
                     .attr("y", -8)
                     .attr("width", 16)
@@ -90,6 +91,10 @@
                 });
             });
         });
+
+        function followlink(d) {
+            document.location.href = d.href
+        }
 
         </script>
 

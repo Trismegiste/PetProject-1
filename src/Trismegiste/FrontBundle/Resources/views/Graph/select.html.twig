@@ -11,7 +11,7 @@
         {% for item in graph %}
             <li><a href="{{ path('graph_select', {id:item.getId()}) }}">{{ item.getTitle() }}</a></li>
         {% endfor %}
-        <li>------</li>
+        <li class="divider"></li>
         <li><a href="{{ path('graph_create') }}">Add new...</a></li>
     </ul>
 </li>

@@ -46,17 +46,10 @@ class GraphControllerTest extends WebTestCase
         $this->assertRegExp('#d3\.v3\.min\.js#', $this->client->getResponse()->getContent());
         // call ajax
         $crawler = $this->client->request('GET', '/graph/nodes/all');
-        $this->assertEquals(array(
-            'nodes' => array(
-                0 => array(
-                    'name' => 'Spock',
-                    'group' => 1,
-                    'icon' => 'npc',
-                ),
-            ),
-            'links' => array(),
-                ), json_decode($this->client->getResponse()->getContent(), true)
-        );
+        $dgraph = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertCount(1, $dgraph['nodes']);
+        $this->assertCount(0, $dgraph['links']);
+        $this->assertEquals('Spock', $dgraph['nodes'][0]['name']);
     }
 
 }
