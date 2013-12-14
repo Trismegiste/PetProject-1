@@ -27,7 +27,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="history">
                     History <b class="caret"></b>
                 </a>
-                 <ul class="dropdown-menu">
+                <ul class="dropdown-menu">
                      {% for url, title in app.session.getBag('history') %}
                          <li><a href="{{ url }}">{{ loop.index }}. {{ title }}</a></li>
                      {% endfor %}
@@ -66,9 +66,19 @@
         <script src="{{ asset('js/keymaster.js') }}"></script>
         <script>
             $(document).ready(function() {
-                key('alt+h', function(){ 
+                key('alt+h', function() {
                     $('#history').trigger('click')
                 });
+
+                key('1,2,3,4,5,6,7,8', function(e) {
+                    if ($('#history').parent().hasClass('open')) {
+                        var idx = e.keyCode-48
+                        var link = $('#history + ul.dropdown-menu li:nth-child(' + idx + ') a').attr('href')
+                        if (link != undefined) {
+                            document.location.href = link
+                        }
+                    }
+                })
             })
         </script>        
         {% block javascripts %}{% endblock %}
