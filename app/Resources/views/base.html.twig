@@ -74,7 +74,7 @@
                     if ($('#history').parent().hasClass('open')) {
                         var idx = e.keyCode-48
                         var link = $('#history + ul.dropdown-menu li:nth-child(' + idx + ') a').attr('href')
-                        if (link != undefined) {
+                        if (link !== undefined) {
                             document.location.href = link
                         }
                     }

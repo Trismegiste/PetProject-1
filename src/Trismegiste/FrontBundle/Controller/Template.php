@@ -36,6 +36,7 @@ abstract class Template extends Controller
             'Create' => 'vertex_create',
             'Check Links' => 'edge_findbroken',
             'Batch insert' => 'vertex_batchcreate',
+            'Combat' => 'combat_index',
             'About' => 'trismegiste_about'
         ];
     }
