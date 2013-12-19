@@ -9,29 +9,59 @@
     <button class="btn" ng-click="addCharacter()">Add new</button>
 </div>
 
-<div class="span5">
+<div class="span6">
     <form class="form-horizontal" novalidate="novalidate">    
         <div class="control-group">
-            <label class="control-label required">Name</label>
+            <label class="control-label">Name</label>
             <div class="controls">
                 <input ng-model="selected_char.name" type="text" class="span4"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label required">Init</label>
+            <label class="control-label">Init</label>
             <div class="controls">
-                <input ng-model="selected_char.init" type="number" class="span4"/>
+                <input ng-model="selected_char.init" type="number" class="span3"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label required">HP</label>
+            <label class="control-label">TN Hit</label>
             <div class="controls">
-                <input ng-model="selected_char.HP" type="number" class="span4"/>
+                <input ng-model="selected_char.TNHit" type="number" class="span3"/>
+            </div>
+        </div>        
+        <div class="control-group">
+            <label class="control-label">Earth</label>
+            <div class="controls">
+                <input ng-model="selected_char.earth" type="number" class="span2"/>
+                Total: {{ getHP(selected_char) }}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Wound</label>
+            <div class="controls">
+                <input ng-model="selected_char.wound" type="number" class="span3"/>
+                Malus: {{ getWoundMalus(selected_char) }}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Attack</label>
+            <div class="controls">
+                <input ng-model="selected_char.attack.roll" type="number" class="span2"/>
+                k
+                <input ng-model="selected_char.attack.keep" type="number" class="span2"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Damage</label>
+            <div class="controls">
+                <input ng-model="selected_char.damage.roll" type="number" class="span2"/>
+                k
+                <input ng-model="selected_char.damage.keep" type="number" class="span2"/>
             </div>
         </div>
     </form>
 </div>
 
-<div class="span4">
+<div class="span3">
     Nothing here {{'yet' + '!'}}
 </div>
