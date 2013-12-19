@@ -1,13 +1,31 @@
 <div class="span3">
+    <p>
+        Current Init {{ currentInit }}
+        <button class="btn btn-primary" ng-click="goToNextTurn()">Next turn</button>
+    </p>
+    <p>
+        Current round {{ currentRound }}
+        <button class="btn btn-danger" ng-click="goToNextRound()">Next round</button>
+    </p>
+</div>
+
+<div class="span3">
     <table class="table">
         <thead><tr><th>I</th><th>C</th></tr></thead>
         <tr ng-repeat="fighter in characters | orderBy:'-init'"
-            ng-click="select(fighter.name)"
-            ng-class="getHilite(fighter.init)">
-            <td>{{fighter.init}}</td><td>{{ fighter.name }}</td>
+            ng-click="select(fighter.name)">
+            <td ng-class="getHilite(fighter.init)">{{fighter.init}}</td>
+            <td ng-class="isSelected(fighter.name)">{{ fighter.name }}</td>
         </tr>
     </table>
-    <button class="btn" ng-click="addCharacter()">Add new</button>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <select class="span6" ng-model="newTemplateName">
+                <option ng-repeat="perso in template">{{ perso.name }}</option>
+            </select>
+            <button class="btn btn-success" ng-click="addCharacter(newTemplateName)">Add new</button>
+        </div>
+    </form>
 </div>
 
 <div class="span6">
@@ -19,15 +37,37 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label">Target</label>
+            <div class="controls">
+                <select ng-model="selected_char.target" class="span4">
+                    <option ng-repeat="p in characters">{{ p.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label">Init</label>
             <div class="controls">
                 <input ng-model="selected_char.init" type="number" class="span3"/>
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label">Stance</label>
+            <div class="controls">
+                <select ng-model="selected_char.stance" class="span3">
+                    <option>attack</option>
+                    <option>full att</option>
+                    <option>def</option>
+                    <option>full def</option>
+                    <option>center</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label">TN Hit</label>
             <div class="controls">
                 <input ng-model="selected_char.TNHit" type="number" class="span3"/>
+                DamRed
+                <input ng-model="selected_char.damageReduction" type="number" class="span2"/>
             </div>
         </div>        
         <div class="control-group">
@@ -62,19 +102,8 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <button class="btn btn-warning" ng-click="duplicate(selected_char)">Duplicate</button>
+                <button class="btn btn-success" ng-click="duplicate(selected_char)">Duplicate</button>
             </div>
         </div>
     </form>
-</div>
-
-<div class="span3">
-    <p>
-        Current Init {{ currentInit }}
-        <button class="btn btn-warning" ng-click="goToNextTurn()">Next turn</button>
-    </p>
-    <p>
-        Current round {{ currentRound }}
-        <button class="btn btn-danger" ng-click="goToNextRound()">Next round</button>
-    </p>
 </div>

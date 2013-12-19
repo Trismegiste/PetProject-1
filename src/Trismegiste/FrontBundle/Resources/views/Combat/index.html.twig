@@ -14,8 +14,12 @@
 {%block stylesheets %}
 {{ parent() }}
 <style>
-        tr.current-turn td {
+        td.current-turn {
             background-color: #5bc0de
-        }        
+        }   
+        
+        td.selected-character {
+            background-color: #D3D3D3
+        }
 </style>
 {% endblock %}

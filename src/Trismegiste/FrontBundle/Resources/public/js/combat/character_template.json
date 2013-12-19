@@ -1,0 +1,35 @@
+[
+    {
+        "name": "new_char",
+        "wound": 0
+    },
+    {
+        "name": "peon",
+        "TNHit": 10,
+        "earth": 1,
+        "wound": 0,
+        "attack": {
+            "roll": 2,
+            "keep": 1
+        },
+        "damage": {
+            "roll": 2,
+            "keep": 1
+        }
+    },
+    {
+        "name": "ronin armor",
+        "TNHit": 25,
+        "earth": 3,
+        "wound": 0,
+        "attack": {
+            "roll": 5,
+            "keep": 3
+        },
+        "damageReduction": -3,
+        "damage": {
+            "roll": 5,
+            "keep": 2
+        }
+    }
+]

@@ -1,6 +1,6 @@
 var combatApp = angular.module('combatApp', []);
 
-combatApp.controller('MainCtrl', function($scope) {
+combatApp.controller('MainCtrl', function($scope, $http) {
     var characters = [
         {name: 'Spock', earth: 2, init: 5},
         {name: 'Kirk', earth: 5, init: 13},
@@ -12,6 +12,10 @@ combatApp.controller('MainCtrl', function($scope) {
     $scope.currentInit = 100; // max init
     $scope.currentRound = 1;
 
+    $http.get('/bundles/trismegistefront/js/combat/character_template.json').success(function(data) {
+        $scope.template = data;
+    });
+
     $scope.select = function(name) {
         characters.forEach(function(item) {
             if (item.name === name) {
@@ -20,8 +24,12 @@ combatApp.controller('MainCtrl', function($scope) {
         });
     };
 
-    $scope.addCharacter = function() {
-        $scope.characters.push({name: 'new_char', init: 0});
+    $scope.addCharacter = function(name) {
+        $scope.template.forEach(function(item) {
+            if (item.name === name) {
+                $scope.characters.push(angular.copy(item));
+            }
+        });
     };
 
     $scope.getWoundMalus = function(perso) {
@@ -66,6 +74,10 @@ combatApp.controller('MainCtrl', function($scope) {
             $scope.currentInit = 100;
             $scope.goToNextTurn();
         }
+    };
+
+    $scope.isSelected = function(name) {
+        return (name === $scope.selected_char.name) ? "selected-character" : '';
     };
 
 });
