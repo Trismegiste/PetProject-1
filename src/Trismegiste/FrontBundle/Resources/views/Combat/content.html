@@ -7,11 +7,11 @@
         </tr>
         <tr>
             <td>Attack</td><td>{{ attackRollResult }}</td>
-            <td><button class="btn" ng-click="attackRoll(selected_char)">Roll</button></td>
+            <td><button ng-disabled="!hasSelection()" class="btn" ng-click="attackRoll(selected_char)">Roll</button></td>
         </tr>
         <tr>
             <td>Round</td><td>{{ currentRound }}</td>
-            <td><button class="btn btn-danger" ng-click="goToNextRound()">Next</button></td>
+            <td><button class="btn btn-danger" ng-click="goToNextRound()" ng-disabled="0 !== currentInit">Next</button></td>
         </tr>
     </table>
 </div>
@@ -108,8 +108,9 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label">Note</label>
             <div class="controls">
-                <button class="btn btn-success" ng-click="duplicate(selected_char)">Duplicate</button>
+                <textarea ng-model="selected_char.note"></textarea>
             </div>
         </div>
     </form>

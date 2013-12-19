@@ -81,8 +81,19 @@ combatApp.controller('MainCtrl', function($scope, $http) {
         return (name === $scope.selected_char.name) ? "selected-character" : '';
     };
 
+    $scope.hasSelection = function() {
+        return !angular.isUndefined($scope.selected_char.name);
+    };
+
     $scope.attackRoll = function(p) {
-        $scope.attackRollResult = rollAndKeep(p.attack.roll, p.attack.keep);
+        try {
+            $scope.attackRollResult = rollAndKeep(p.attack.roll, p.attack.keep)
+                    + " / " +
+                    rollAndKeep(p.damage.roll, p.damage.keep);
+        } catch (e) {
+            console.log(e);
+            $scope.attackRollResult = 'N/A';
+        }
     };
 
     function oneD10() {
@@ -101,11 +112,20 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     }
 
     function rollAndKeep(roll, keep) {
+        if (!((roll > 0) && (keep > 0))) {
+            return 0;
+        }
+
+        if (keep > roll) {
+            keep = roll;
+        }
+
         var res = 0;
         var tirage = [];
         for (var i = 0; i < roll; i++) {
             tirage.push(explodingD10());
         }
+        console.log(tirage);
         tirage.sort(function(a, b) {
             return a < b;
         });
