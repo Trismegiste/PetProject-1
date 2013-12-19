@@ -11,6 +11,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     $scope.characters = characters;
     $scope.currentInit = 100; // max init
     $scope.currentRound = 1;
+    $scope.selected_char = {};
 
     $http.get('/bundles/trismegistefront/js/combat/character_template.json').success(function(data) {
         $scope.template = data;
@@ -33,7 +34,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     };
 
     $scope.getWoundMalus = function(perso) {
-        if (perso !== undefined) {
+        if (!angular.isUndefined(perso)) {
             var idxMalus = perso.wound / perso.earth;
             var woundedMalus = [3, 5, 10, 15, 20, 40, 'out', 'dead'];
 
@@ -47,7 +48,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     };
 
     $scope.getHP = function(perso) {
-        if (perso !== undefined) {
+        if (!angular.isUndefined(perso)) {
             return perso.earth * (5 + 7 * 2);
         }
     };
@@ -80,6 +81,41 @@ combatApp.controller('MainCtrl', function($scope, $http) {
         return (name === $scope.selected_char.name) ? "selected-character" : '';
     };
 
+    $scope.attackRoll = function(p) {
+        $scope.attackRollResult = rollAndKeep(p.attack.roll, p.attack.keep);
+    };
+
+    function oneD10() {
+        return Math.ceil(Math.random() * 10);
+    }
+
+    function explodingD10() {
+        var res = 0;
+        var dice;
+        do {
+            dice = oneD10();
+            res += dice;
+        } while (dice === 10);
+
+        return res;
+    }
+
+    function rollAndKeep(roll, keep) {
+        var res = 0;
+        var tirage = [];
+        for (var i = 0; i < roll; i++) {
+            tirage.push(explodingD10());
+        }
+        tirage.sort(function(a, b) {
+            return a < b;
+        });
+
+        for (var i = 0; i < keep; i++) {
+            res += tirage[i];
+        }
+
+        return res;
+    }
 });
 
 

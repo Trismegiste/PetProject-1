@@ -1,12 +1,19 @@
 <div class="span3">
-    <p>
-        Current Init {{ currentInit }}
-        <button class="btn btn-primary" ng-click="goToNextTurn()">Next turn</button>
-    </p>
-    <p>
-        Current round {{ currentRound }}
-        <button class="btn btn-danger" ng-click="goToNextRound()">Next round</button>
-    </p>
+    <table class="table">
+        <thead><tr><th>Counter</th><th>Current</th><th>Action</th></tr></thead>
+        <tr>
+            <td>Init</td><td>{{ currentInit }}</td>
+            <td><button class="btn btn-primary" ng-click="goToNextTurn()">Next</button></td>
+        </tr>
+        <tr>
+            <td>Attack</td><td>{{ attackRollResult }}</td>
+            <td><button class="btn" ng-click="attackRoll(selected_char)">Roll</button></td>
+        </tr>
+        <tr>
+            <td>Round</td><td>{{ currentRound }}</td>
+            <td><button class="btn btn-danger" ng-click="goToNextRound()">Next</button></td>
+        </tr>
+    </table>
 </div>
 
 <div class="span3">
