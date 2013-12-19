@@ -1,10 +1,11 @@
 <div class="span3">
-    <ul>
-        <li ng-repeat="fighter in characters | orderBy:'-init'"
+    <table class="table">
+        <thead><tr><th>I</th><th>C</th></tr></thead>
+        <tr ng-repeat="fighter in characters | orderBy:'-init'"
             ng-click="select(fighter.name)">
-            {{fighter.init}}: {{ fighter.name }}
-        </li>
-    </ul>
+            <td>{{fighter.init}}</td><td>{{ fighter.name }}</td>
+        </tr>
+    </table>
     <button class="btn" ng-click="addCharacter()">Add new</button>
 </div>
 
@@ -20,6 +21,12 @@
             <label class="control-label required">Init</label>
             <div class="controls">
                 <input ng-model="selected_char.init" type="number" class="span4"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required">HP</label>
+            <div class="controls">
+                <input ng-model="selected_char.HP" type="number" class="span4"/>
             </div>
         </div>
     </form>

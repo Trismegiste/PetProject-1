@@ -22,7 +22,7 @@ combatApp.controller('MainCtrl', function($scope) {
     };
 
     $scope.addCharacter = function() {
-        $scope.characters.push({name: 'new char', init:0});
+        $scope.characters.push({name: 'new_char', init:0});
     };
 
 });
