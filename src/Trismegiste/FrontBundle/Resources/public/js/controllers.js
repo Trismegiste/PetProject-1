@@ -9,11 +9,10 @@ combatApp.controller('MainCtrl', function($scope) {
     ];
 
     $scope.characters = characters;
-    $scope.currentTurn = 100; // max init
-    $scope.currentRound = 0;
+    $scope.currentInit = 100; // max init
+    $scope.currentRound = 1;
 
     $scope.select = function(name) {
-        console.log(name);
         characters.forEach(function(item) {
             if (item.name === name) {
                 $scope.selected_char = item;
@@ -26,7 +25,7 @@ combatApp.controller('MainCtrl', function($scope) {
     };
 
     $scope.getWoundMalus = function(perso) {
-        if (perso !== 'undefined') {
+        if (perso !== undefined) {
             var idxMalus = perso.wound / perso.earth;
             var woundedMalus = [3, 5, 10, 15, 20, 40, 'out', 'dead'];
 
@@ -40,8 +39,32 @@ combatApp.controller('MainCtrl', function($scope) {
     };
 
     $scope.getHP = function(perso) {
-        if (perso !== 'undefined') {
+        if (perso !== undefined) {
             return perso.earth * (5 + 7 * 2);
+        }
+    };
+
+    $scope.getHilite = function(stat) {
+        return (stat === $scope.currentInit) ? "current-turn" : '';
+    };
+
+    $scope.goToNextTurn = function() {
+        var newInit = 0;
+        characters.forEach(function(item) {
+            if (item.init < $scope.currentInit) {
+                if (item.init > newInit) {
+                    newInit = item.init;
+                }
+            }
+        })
+        $scope.currentInit = newInit;
+    };
+
+    $scope.goToNextRound = function() {
+        if ($scope.currentInit === 0) {
+            $scope.currentRound++;
+            $scope.currentInit = 100;
+            $scope.goToNextTurn();
         }
     };
 

@@ -2,7 +2,8 @@
     <table class="table">
         <thead><tr><th>I</th><th>C</th></tr></thead>
         <tr ng-repeat="fighter in characters | orderBy:'-init'"
-            ng-click="select(fighter.name)">
+            ng-click="select(fighter.name)"
+            ng-class="getHilite(fighter.init)">
             <td>{{fighter.init}}</td><td>{{ fighter.name }}</td>
         </tr>
     </table>
@@ -59,9 +60,21 @@
                 <input ng-model="selected_char.damage.keep" type="number" class="span2"/>
             </div>
         </div>
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-warning" ng-click="duplicate(selected_char)">Duplicate</button>
+            </div>
+        </div>
     </form>
 </div>
 
 <div class="span3">
-    Nothing here {{'yet' + '!'}}
+    <p>
+        Current Init {{ currentInit }}
+        <button class="btn btn-warning" ng-click="goToNextTurn()">Next turn</button>
+    </p>
+    <p>
+        Current round {{ currentRound }}
+        <button class="btn btn-danger" ng-click="goToNextRound()">Next round</button>
+    </p>
 </div>
