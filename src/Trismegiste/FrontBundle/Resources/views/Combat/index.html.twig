@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 {%block content %}
-<div ng-app class="row-fluid">
+<div ng-app="combatApp" class="row-fluid" ng-controller="MainCtrl">
     {% render(controller('TrismegisteFrontBundle:Combat:getContent')) %}
 </div>
 {% endblock %}
@@ -8,4 +8,5 @@
 {%block javascripts %}
 {{ parent() }}
     <script src="{{ asset('bundles/trismegistefront/js/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('bundles/trismegistefront/js/controllers.js') }}"></script>
 {% endblock %}

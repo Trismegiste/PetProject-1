@@ -1,9 +1,30 @@
-<div class="span4">
-    Nothing here {{'yet' + '!'}}
+<div class="span3">
+    <ul>
+        <li ng-repeat="fighter in characters | orderBy:'-init'"
+            ng-click="select(fighter.name)">
+            {{fighter.init}}: {{ fighter.name }}
+        </li>
+    </ul>
+    <button class="btn" ng-click="addCharacter()">Add new</button>
 </div>
-<div class="span4">
-    Nothing here {{'yet' + '!'}}
+
+<div class="span5">
+    <form class="form-horizontal" novalidate="novalidate">    
+        <div class="control-group">
+            <label class="control-label required">Name</label>
+            <div class="controls">
+                <input ng-model="selected_char.name" type="text" class="span4"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required">Init</label>
+            <div class="controls">
+                <input ng-model="selected_char.init" type="number" class="span4"/>
+            </div>
+        </div>
+    </form>
 </div>
+
 <div class="span4">
     Nothing here {{'yet' + '!'}}
 </div>
