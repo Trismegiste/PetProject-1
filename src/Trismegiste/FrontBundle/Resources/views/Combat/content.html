@@ -1,4 +1,4 @@
-<div class="span3">
+<div class="span4">
     <table class="table">
         <thead><tr><th>Counter</th><th>Current</th><th>Action</th></tr></thead>
         <tr>
@@ -11,12 +11,15 @@
         </tr>
         <tr>
             <td>Round</td><td>{{ currentRound }}</td>
-            <td><button class="btn btn-danger" ng-click="goToNextRound()" ng-disabled="0 !== currentInit">Next</button></td>
+            <td><button class="btn btn-success" ng-click="goToNextRound()" ng-disabled="0 !== currentInit">Next</button></td>
         </tr>
     </table>
+    <h4>Last state</h4>
+    <button class="btn btn-large btn-danger pull-right" ng-click="persist()"><i class="icon-white icon-hdd"></i> Write</button>
+    <button class="btn btn-large btn-warning" ng-click="restore()"><i class="icon-white icon-hdd"></i> Read</button>
 </div>
 
-<div class="span3">
+<div class="span4">
     <table class="table">
         <thead><tr><th>I</th><th>C</th></tr></thead>
         <tr ng-repeat="fighter in characters | orderBy:'-init'"
@@ -30,23 +33,23 @@
             <select class="span6" ng-model="newTemplateName">
                 <option ng-repeat="perso in template">{{ perso.name }}</option>
             </select>
-            <button class="btn btn-success" ng-click="addCharacter(newTemplateName)">Add new</button>
+            <button class="btn" ng-click="addCharacter(newTemplateName)">Add new</button>
         </div>
     </form>
 </div>
 
-<div class="span6">
+<div class="span4">
     <form class="form-horizontal" novalidate="novalidate">    
         <div class="control-group">
             <label class="control-label">Name</label>
             <div class="controls">
-                <input ng-model="selected_char.name" type="text" class="span4"/>
+                <input ng-model="selected_char.name" type="text" class="span12"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Target</label>
             <div class="controls">
-                <select ng-model="selected_char.target" class="span4">
+                <select ng-model="selected_char.target" class="span12">
                     <option ng-repeat="p in characters">{{ p.name }}</option>
                 </select>
             </div>
@@ -60,7 +63,7 @@
         <div class="control-group">
             <label class="control-label">Stance</label>
             <div class="controls">
-                <select ng-model="selected_char.stance" class="span3">
+                <select ng-model="selected_char.stance" class="span6">
                     <option>attack</option>
                     <option>full att</option>
                     <option>def</option>
@@ -74,13 +77,13 @@
             <div class="controls">
                 <input ng-model="selected_char.TNHit" type="number" class="span3"/>
                 DamRed
-                <input ng-model="selected_char.damageReduction" type="number" class="span2"/>
+                <input ng-model="selected_char.damageReduction" type="number" class="span3"/>
             </div>
         </div>        
         <div class="control-group">
             <label class="control-label">Earth</label>
             <div class="controls">
-                <input ng-model="selected_char.earth" type="number" class="span2"/>
+                <input ng-model="selected_char.earth" type="number" class="span3"/>
                 Total: {{ getHP(selected_char) }}
             </div>
         </div>
@@ -94,23 +97,23 @@
         <div class="control-group">
             <label class="control-label">Attack</label>
             <div class="controls">
-                <input ng-model="selected_char.attack.roll" type="number" class="span2"/>
+                <input ng-model="selected_char.attack.roll" type="number" class="span3"/>
                 k
-                <input ng-model="selected_char.attack.keep" type="number" class="span2"/>
+                <input ng-model="selected_char.attack.keep" type="number" class="span3"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Damage</label>
             <div class="controls">
-                <input ng-model="selected_char.damage.roll" type="number" class="span2"/>
+                <input ng-model="selected_char.damage.roll" type="number" class="span3"/>
                 k
-                <input ng-model="selected_char.damage.keep" type="number" class="span2"/>
+                <input ng-model="selected_char.damage.keep" type="number" class="span3"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Note</label>
             <div class="controls">
-                <textarea ng-model="selected_char.note"></textarea>
+                <textarea ng-model="selected_char.note" class="span12"></textarea>
             </div>
         </div>
     </form>

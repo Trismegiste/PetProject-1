@@ -1,14 +1,14 @@
 var combatApp = angular.module('combatApp', []);
 
 combatApp.controller('MainCtrl', function($scope, $http) {
-    var characters = [
+
+    $scope.characters = [
         {name: 'Spock', earth: 2, init: 5},
         {name: 'Kirk', earth: 5, init: 13},
         {name: 'Scotty', earth: 3, init: 8},
         {name: 'McCoy', earth: 4, init: 4}
     ];
 
-    $scope.characters = characters;
     $scope.currentInit = 100; // max init
     $scope.currentRound = 1;
     $scope.selected_char = {};
@@ -18,7 +18,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     });
 
     $scope.select = function(name) {
-        characters.forEach(function(item) {
+        $scope.characters.forEach(function(item) {
             if (item.name === name) {
                 $scope.selected_char = item;
             }
@@ -59,7 +59,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
 
     $scope.goToNextTurn = function() {
         var newInit = 0;
-        characters.forEach(function(item) {
+        $scope.characters.forEach(function(item) {
             if (item.init < $scope.currentInit) {
                 if (item.init > newInit) {
                     newInit = item.init;
@@ -136,6 +136,24 @@ combatApp.controller('MainCtrl', function($scope, $http) {
 
         return res;
     }
+
+    $scope.persist = function() {
+        localStorage.setItem('rpgraph/combatState', angular.toJson({
+            listing: $scope.characters,
+            round: $scope.currentRound,
+            init: $scope.currentInit
+        }));
+    };
+
+    $scope.restore = function() {
+        var state = angular.fromJson(localStorage.getItem('rpgraph/combatState'));
+
+        $scope.characters = state.listing;
+        $scope.currentRound = state.round;
+        $scope.currentInit = state.init;
+
+    };
+
 });
 
 
