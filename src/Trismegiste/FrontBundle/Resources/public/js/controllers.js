@@ -87,12 +87,19 @@ combatApp.controller('MainCtrl', function($scope, $http) {
 
     $scope.attackRoll = function(p) {
         try {
-            $scope.attackRollResult = rollAndKeep(p.attack.roll, p.attack.keep)
-                    + " / " +
-                    rollAndKeep(p.damage.roll, p.damage.keep);
+            $scope.attackRollResult = rollAndKeep(p.attack.roll, p.attack.keep) - $scope.getWoundMalus((p));
         } catch (e) {
             console.log(e);
             $scope.attackRollResult = 'N/A';
+        }
+    };
+
+    $scope.damageRoll = function(p) {
+        try {
+            $scope.damageRollResult = rollAndKeep(p.damage.roll, p.damage.keep);
+        } catch (e) {
+            console.log(e);
+            $scope.damageRollResult = 'N/A';
         }
     };
 
@@ -152,6 +159,18 @@ combatApp.controller('MainCtrl', function($scope, $http) {
         $scope.currentRound = state.round;
         $scope.currentInit = state.init;
 
+    };
+
+    $scope.addWoundToSelected = function(val) {
+        var reduc = 0;
+        if (!angular.isUndefined($scope.selected_char.damageReduction)) {
+            reduc = $scope.selected_char.damageReduction;
+        }
+        if (angular.isUndefined($scope.selected_char.wound)) {
+            $scope.selected_char.wound = 0;
+        }
+        $scope.selected_char.wound += val + reduc;
+        $scope.addedWoundsValue = '';
     };
 
 });

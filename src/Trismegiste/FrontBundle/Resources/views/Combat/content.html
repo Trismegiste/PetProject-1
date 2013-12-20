@@ -6,13 +6,26 @@
             <td><button class="btn btn-primary" ng-click="goToNextTurn()">Next</button></td>
         </tr>
         <tr>
-            <td>Attack</td><td>{{ attackRollResult }}</td>
-            <td><button ng-disabled="!hasSelection()" class="btn" ng-click="attackRoll(selected_char)">Roll</button></td>
-        </tr>
-        <tr>
             <td>Round</td><td>{{ currentRound }}</td>
             <td><button class="btn btn-success" ng-click="goToNextRound()" ng-disabled="0 !== currentInit">Next</button></td>
         </tr>
+    </table>
+    <h4 ng-bind="selected_char.name">Character</h4>
+    <table class="table">
+        <tr>
+            <td><button ng-disabled="!hasSelection()" class="btn" ng-click="attackRoll(selected_char)">Attack Roll</button></td>
+            <td>{{ attackRollResult }} (included -{{ getWoundMalus(selected_char) }})</td>
+        </tr>    
+        <tr>
+            <td><button ng-disabled="!hasSelection()" class="btn" ng-click="damageRoll(selected_char)">Damage Roll</button></td>
+            <td>{{ damageRollResult }}</td>
+        </tr>            
+        <tr>
+            <td><input class="span4" ng-model="addedWoundsValue" type="number"/></td>
+            <td>
+                <button ng-disabled="!hasSelection()" class="btn" ng-click="addWoundToSelected(addedWoundsValue)">Add wounds</button>                    </div>
+            </td>
+        </tr>        
     </table>
     <h4>Last state</h4>
     <button class="btn btn-large btn-danger pull-right" ng-click="persist()"><i class="icon-white icon-hdd"></i> Write</button>
