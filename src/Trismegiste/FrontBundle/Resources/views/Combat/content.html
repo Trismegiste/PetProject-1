@@ -10,7 +10,7 @@
             <td><button class="btn btn-success" ng-click="goToNextRound()" ng-disabled="0 !== currentInit">Next</button></td>
         </tr>
     </table>
-    <h4 ng-bind="selected_char.name">Character</h4>
+    <h4>Character {{ selected_char.name }}</h4>
     <table class="table">
         <tr>
             <td><button ng-disabled="!hasSelection()" class="btn" ng-click="attackRoll(selected_char)">Attack Roll</button></td>
@@ -23,7 +23,15 @@
         <tr>
             <td><input class="span4" ng-model="addedWoundsValue" type="number"/></td>
             <td>
-                <button ng-disabled="!hasSelection()" class="btn" ng-click="addWoundToSelected(addedWoundsValue)">Add wounds</button>                    </div>
+                <button ng-disabled="!hasSelection()" class="btn" ng-click="addWoundToSelected(addedWoundsValue)">Add wounds</button>
+            </td>
+        </tr>     
+        <tr>
+            <td>
+                <button ng-disabled="!hasSelection()" class="btn btn-inverse" ng-click="setKilled(selected_char)">Killed</button> 
+            </td>
+            <td>
+                <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteCharacter(selected_char)">Delete</button>              
             </td>
         </tr>        
     </table>

@@ -1,13 +1,15 @@
 [
     {
         "name": "new_char",
-        "wound": 0
+        "wound": 0,
+        "damageReduction": 0
     },
     {
         "name": "peon",
         "TNHit": 10,
         "earth": 1,
         "wound": 0,
+        "damageReduction": 0,
         "attack": {"roll": 2, "keep": 1},
         "damage": {"roll": 2, "keep": 1}
     },

@@ -169,9 +169,26 @@ combatApp.controller('MainCtrl', function($scope, $http) {
         if (angular.isUndefined($scope.selected_char.wound)) {
             $scope.selected_char.wound = 0;
         }
-        $scope.selected_char.wound += val + reduc;
-        $scope.addedWoundsValue = '';
+        $scope.selected_char.wound += Math.max(0, val + reduc);
+        $scope.addedWoundsValue = 0;
     };
+
+    $scope.setKilled = function(p) {
+        p.wound = $scope.getHP(p) + 1
+        p.init = 0
+    }
+
+    $scope.deleteCharacter = function(p) {
+        $scope.characters.forEach(function(item, index) {
+            if (item.name === p.name) {
+                $scope.characters.splice(index, 1)
+                if ($scope.selected_char.name === p.name) {
+                    $scope.selected_char = {}
+                }
+                return;
+            }
+        })
+    }
 
 });
 
