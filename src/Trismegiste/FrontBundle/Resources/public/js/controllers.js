@@ -25,12 +25,37 @@ combatApp.controller('MainCtrl', function($scope, $http) {
         });
     };
 
+    function existCharacterName(name) {
+        var flag = false;
+
+        $scope.characters.forEach(function(item) {
+            if (item.name === name) {
+                flag = true;
+                return;
+            }
+        })
+
+        return flag;
+    }
+
     $scope.addCharacter = function(name) {
+        var selected = null;
         $scope.template.forEach(function(item) {
             if (item.name === name) {
-                $scope.characters.push(angular.copy(item));
+                selected = angular.copy(item)
             }
         });
+
+        var finalName = selected.name;
+        var index = 1;
+
+        while (existCharacterName(finalName)) {
+            finalName = selected.name + index;
+            index++;
+        }
+        selected.name = finalName;
+
+        $scope.characters.push(selected);
     };
 
     $scope.getWoundMalus = function(perso) {
