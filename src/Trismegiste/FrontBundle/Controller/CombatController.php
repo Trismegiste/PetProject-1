@@ -19,9 +19,4 @@ class CombatController extends Template
         return $this->render('TrismegisteFrontBundle:Combat:index.html.twig');
     }
 
-    public function getContentAction()
-    {
-        return new Response(file_get_contents(__DIR__ . '/../Resources/views/Combat/content.html'));
-    }
-
 }

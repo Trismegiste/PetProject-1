@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 {%block content %}
 <div ng-app="combatApp" class="row-fluid" ng-controller="MainCtrl">
-    {% render(controller('TrismegisteFrontBundle:Combat:getContent')) %}
+    {% include('TrismegisteFrontBundle:Combat:content.html.twig') %}
 </div>
 {% endblock %}
 
