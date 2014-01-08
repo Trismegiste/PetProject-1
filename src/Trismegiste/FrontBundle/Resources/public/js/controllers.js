@@ -2,20 +2,16 @@ var combatApp = angular.module('combatApp', []);
 
 combatApp.controller('MainCtrl', function($scope, $http) {
 
-    $scope.characters = [
-        {name: 'Spock', earth: 2, init: 5},
-        {name: 'Kirk', earth: 5, init: 13},
-        {name: 'Scotty', earth: 3, init: 8},
-        {name: 'McCoy', earth: 4, init: 4}
-    ];
+    $scope.characters = [];
 
     $scope.currentInit = 100; // max init
     $scope.currentRound = 1;
     $scope.selected_char = {};
 
-    $http.get('/bundles/trismegistefront/js/combat/character_template.json').success(function(data) {
-        $scope.template = data;
-    });
+    $scope.template = [{name: 'empty'}];
+    if (localStorage.hasOwnProperty('rpgraph/combat/template')) {
+        $scope.template = angular.fromJson(localStorage.getItem('rpgraph/combat/template'))
+    }
 
     $scope.select = function(name) {
         $scope.characters.forEach(function(item) {
@@ -170,7 +166,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     }
 
     $scope.persist = function() {
-        localStorage.setItem('rpgraph/combatState', angular.toJson({
+        localStorage.setItem('rpgraph/combat/state', angular.toJson({
             listing: $scope.characters,
             round: $scope.currentRound,
             init: $scope.currentInit
@@ -178,7 +174,7 @@ combatApp.controller('MainCtrl', function($scope, $http) {
     };
 
     $scope.restore = function() {
-        var state = angular.fromJson(localStorage.getItem('rpgraph/combatState'));
+        var state = angular.fromJson(localStorage.getItem('rpgraph/combat/state'));
 
         $scope.characters = state.listing;
         $scope.currentRound = state.round;
@@ -213,6 +209,38 @@ combatApp.controller('MainCtrl', function($scope, $http) {
                 return;
             }
         })
+    }
+
+    $scope.deleteTemplateByName = function(name) {
+        $scope.template.forEach(function(item, index) {
+            if (item.name === name) {
+                $scope.template.splice(index, 1)
+            }
+        })
+
+        storeAllTemplate()
+    }
+
+    $scope.saveAsTemplate = function(chara) {
+        var found = false
+
+        $scope.template.forEach(function(item, index) {
+            if (item.name === chara.name) {
+                $scope.template[index] = angular.copy(chara)
+                found = true
+                return
+            }
+        })
+
+        if (!found) {
+            $scope.template.push(angular.copy(chara))
+        }
+
+        storeAllTemplate()
+    }
+
+    function storeAllTemplate() {
+        localStorage.setItem('rpgraph/combat/template', angular.toJson($scope.template))
     }
 
 });

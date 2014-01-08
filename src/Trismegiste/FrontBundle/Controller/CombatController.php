@@ -6,8 +6,6 @@
 
 namespace Trismegiste\FrontBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-
 /**
  * CombatController manages combats
  */

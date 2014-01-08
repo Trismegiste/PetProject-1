@@ -34,6 +34,14 @@
             <td>
                 <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteCharacter(selected_char)">Delete</button>              
             </td>
+        </tr>                 
+        <tr>
+            <td>
+                <button ng-disabled="!hasSelection()" class="btn btn-success" ng-click="saveAsTemplate(selected_char)">Save as template</button> 
+            </td>
+            <td>
+                <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteTemplateByName(selected_char.name)">Delete template</button>              
+            </td>
         </tr>        
     </table>
     <h4>Last state</h4>
