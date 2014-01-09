@@ -51,11 +51,14 @@
 
 <div class="span4">
     <table class="table">
-        <thead><tr><th>I</th><th>C</th></tr></thead>
+        <thead><tr><th>Init</th><th>Name</th><th>W</th><th>Stan</th><th>TN</th></tr></thead>
         <tr ng-repeat="fighter in characters | orderBy:'-init'"
             ng-click="select(fighter.name)">
             <td ng-class="getHilite(fighter.init)">{{fighter.init}}</td>
             <td ng-class="isSelected(fighter.name)">{{ fighter.name }}</td>
+            <td ng-class="isSelected(fighter.name)">{{ fighter.wound }}/{{ getHP(fighter) }}</td>
+            <td ng-class="isSelected(fighter.name)">{{ fighter.stance }}</td>
+            <td ng-class="isSelected(fighter.name)">{{ fighter.TNHit }}</td>
         </tr>
     </table>
     <form class="form-horizontal">
@@ -74,14 +77,6 @@
             <label class="control-label">Name</label>
             <div class="controls">
                 <input ng-model="selected_char.name" type="text" class="span12"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Target</label>
-            <div class="controls">
-                <select ng-model="selected_char.target" class="span12">
-                    <option ng-repeat="p in characters">{{ p.name }}</option>
-                </select>
             </div>
         </div>
         <div class="control-group">
@@ -122,6 +117,14 @@
             <div class="controls">
                 <input ng-model="selected_char.wound" type="number" class="span3"/>
                 Malus: {{ getWoundMalus(selected_char) }}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Target</label>
+            <div class="controls">
+                <select ng-model="selected_char.target" class="span12">
+                    <option ng-repeat="p in characters">{{ p.name }}</option>
+                </select>
             </div>
         </div>
         <div class="control-group">
