@@ -210,6 +210,20 @@ combatApp.controller('MainCtrl', function($scope, $http) {
             }
         })
     }
+    
+    $scope.duplicateCharacter = function(p) {
+        var selected = angular.copy(p);
+
+        var finalName = selected.name;
+        var index = 1;
+
+        while (existCharacterName(finalName)) {
+            finalName = selected.name + index;
+            index++;
+        }
+        selected.name = finalName;
+        $scope.characters.push(selected)
+    };
 
     $scope.deleteTemplateByName = function(name) {
         $scope.template.forEach(function(item, index) {

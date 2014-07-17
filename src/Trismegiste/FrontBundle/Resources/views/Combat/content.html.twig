@@ -29,15 +29,21 @@
         </tr>     
         <tr>
             <td>
+                <button ng-disabled="!hasSelection()" class="btn btn-success" ng-click="duplicateCharacter(selected_char)">Duplicate</button>              
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
                 <button ng-disabled="!hasSelection()" class="btn btn-inverse" ng-click="setKilled(selected_char)">Killed</button> 
             </td>
-            <td>
-                <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteCharacter(selected_char)">Delete</button>              
+            <td>                
+                <button ng-disabled="!hasSelection()" class="btn btn-success" ng-click="saveAsTemplate(selected_char)">Save as template</button>
             </td>
         </tr>                 
         <tr>
             <td>
-                <button ng-disabled="!hasSelection()" class="btn btn-success" ng-click="saveAsTemplate(selected_char)">Save as template</button> 
+                <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteCharacter(selected_char)">Delete</button>              
             </td>
             <td>
                 <button ng-disabled="!hasSelection()" class="btn btn-danger" ng-click="deleteTemplateByName(selected_char.name)">Delete template</button>              
